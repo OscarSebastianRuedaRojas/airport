@@ -1,4 +1,5 @@
-
+create database airport;
+use airport;
 
 CREATE TABLE document_types (
     id_document_type INT AUTO_INCREMENT PRIMARY KEY,
