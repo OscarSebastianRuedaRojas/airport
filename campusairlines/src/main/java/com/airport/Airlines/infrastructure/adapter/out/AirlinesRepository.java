@@ -50,7 +50,6 @@ public class AirlinesRepository implements AirlinesRepositoryPort {
         Airlines newAirline = new Airlines();
         try (Connection connection = DriverManager.getConnection(url, username, password)){
             String query = "SELECT id, airline_name FROM airlines WHERE id = ?"; 
-            
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery(); // no se debe pasar ya que prepared statment ya preparo la consulta
@@ -63,6 +62,43 @@ public class AirlinesRepository implements AirlinesRepositoryPort {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void save(Airlines airline) {
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "INSERT INTO airlines VALUES (NULL, ? )";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, airline.getairline_name());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delete(Long id) {
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "DELETE FROM airlines WHERE ID = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(Long id, String newAirlineNamw) {
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "UPDATE airlines SET airline_name = ? WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(2, id);
+            preparedStatement.setString(1, newAirlineNamw);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }

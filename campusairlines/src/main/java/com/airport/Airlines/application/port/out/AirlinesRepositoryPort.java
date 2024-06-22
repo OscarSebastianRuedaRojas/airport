@@ -10,4 +10,7 @@ import com.airport.Airlines.domain.Airlines;
 public interface AirlinesRepositoryPort {
     Airlines findById(Long id); 
     List<Airlines> findAll();
+    void save(Airlines airline);
+    void delete(Long id);
+    void update(Long id, String newAirlineNamw);
 }
