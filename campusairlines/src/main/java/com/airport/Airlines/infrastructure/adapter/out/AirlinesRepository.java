@@ -57,6 +57,9 @@ public class AirlinesRepository implements AirlinesRepositoryPort {
                 newAirline.setId(resultSet.getLong("id"));
                 newAirline.setairline_name(resultSet.getString("airline_name"));
                 return newAirline;
+            } else {
+                System.out.println("No hay aerolinea con el id: " + id + ".");
+                return newAirline;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,15 +68,18 @@ public class AirlinesRepository implements AirlinesRepositoryPort {
     }
 
     @Override
-    public void save(Airlines airline) {
+    public Airlines save(Airlines airline) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             String query = "INSERT INTO airlines VALUES (NULL, ? )";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, airline.getairline_name());
             preparedStatement.executeUpdate();
+            return airline;
         } catch (Exception e) {
+            System.out.println("Ocurrio un error al consultar la base de datos. Reintente.");
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override
@@ -99,6 +105,28 @@ public class AirlinesRepository implements AirlinesRepositoryPort {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Airlines findByName(String airlineName) {
+        Airlines newAirline = new Airlines();
+        try (Connection connection = DriverManager.getConnection(url, username, password)){
+            String query = "SELECT id, airline_name from airlines WHERE LOWER(airline_name) LiKE LOWER(?)"; 
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, "%" + airlineName + "%");
+            ResultSet resultSet = preparedStatement.executeQuery(); // no se debe pasar ya que prepared statment ya preparo la consulta
+            if (resultSet.next()) {
+                newAirline.setId(resultSet.getLong("id"));
+                newAirline.setairline_name(resultSet.getString("airline_name"));
+                return newAirline;
+            } else {
+                System.out.println("No hay aerolinea con el nombre: " + airlineName + ".");
+                return newAirline;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return newAirline;
     }
     
 }
