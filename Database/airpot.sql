@@ -54,14 +54,14 @@ CREATE Table trips (
     CONSTRAINT fk_destination_city_id Foreign Key (destination_city_id) REFERENCES city(id) 
 );
 
-CREATE TABLE AIRPORT (
+CREATE TABLE airport (
     id VARCHAR(5) PRIMARY KEY,
     airport_name VARCHAR(50),
     city_id VARCHAR(5),
     CONSTRAINT fk_city_id_airport Foreign Key (city_id) REFERENCES city(id)
 );
 
-CREATE TABLE GATE(
+CREATE TABLE gate(
     id int auto_increment PRIMARY KEY,
     gate_number VARCHAR(10),
     airport_id VARCHAR(5),
