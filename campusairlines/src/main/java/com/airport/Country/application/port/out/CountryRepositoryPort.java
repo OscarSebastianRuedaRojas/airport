@@ -7,7 +7,7 @@ import com.airport.Country.domain.Country;
  * CountryRepositoryPort
  */
 public interface CountryRepositoryPort {
-    Country findById(Long id); 
+    Country findById(String id); 
     Country findByName(String countryName);
     List<Country> findAll();
     Country save(Country country);
