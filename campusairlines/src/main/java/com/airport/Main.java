@@ -1,12 +1,18 @@
 package com.airport;
 
-import com.airport.Country.domain.Country;
-import com.airport.Country.infrastructure.adapter.out.CountryRepository;
+
+import java.util.List;
+
+
+import com.airport.Manufacture.domain.Manufacture;
+import com.airport.Manufacture.infrastructure.adapter.out.ManufactureRepository;
 
 public class Main {
     public static void main(String[] args) {
-        CountryRepository c = new CountryRepository();
-        Country pais = c.findByName("argentina");
-        System.out.println(pais.getCountryName());
+        ManufactureRepository manufactureRepository = new ManufactureRepository();
+        List<Manufacture> manufactures =  manufactureRepository.findAll();
+        for (Manufacture manufacture : manufactures) {
+            System.out.println(manufacture.getManufacture_name());
+        }
     }
 }
