@@ -11,6 +11,6 @@ public interface CountryRepositoryPort {
     Country findByName(String countryName);
     List<Country> findAll();
     Country save(Country country);
-    void delete(Long id);
-    void update(Long id, String newCountryName);
+    void delete(String id);
+    void update(String id, String newCountryName);
 }
