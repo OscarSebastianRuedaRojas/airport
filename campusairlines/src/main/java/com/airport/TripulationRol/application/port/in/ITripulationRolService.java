@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.airport.TripulationRol.domain.TripulationRol;
 
-public interface TripulationRolService {
+public interface ITripulationRolService {
     TripulationRol save(TripulationRol tripulationRol);
-    List<TripulationRol> findAll();
+    List<TripulationRol> listTripulationRol();
 }
