@@ -1,9 +1,10 @@
 package com.airport;
-import com.airport.DocumentType.infrastructure.adapter.in.DocumentTypeController;
+import com.airport.FlightFare.infrastructure.adapter.in.FlightFareController;
 
 public class Main {
     public static void main(String[] args) {
-        DocumentTypeController troll = new DocumentTypeController();
-        troll.selectDocumentTypeList();
+        FlightFareController troll = new FlightFareController();
+        troll.registerFlightfare();
+        troll.flightFaresList();
     }
 }
