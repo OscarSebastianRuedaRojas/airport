@@ -39,7 +39,7 @@ public class DocumentTypeController {
             List <DocumentType> docTypesList = documentTypeService.listDocumentType();
             docTypesList.forEach(System.out::println);
             System.out.println("Seleccione tipo.");
-            Long tipoId = documentTypeService.listDocumentType().get(input.nextInt()).getId();
+            Long tipoId = documentTypeService.listDocumentType().get(input.nextInt()-1).getId();
             return tipoId;
         } catch (Exception e) {
             System.out.println("Error al seleccionar el tipo");

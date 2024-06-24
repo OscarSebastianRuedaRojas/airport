@@ -41,7 +41,7 @@ public class CountryController {
             List <Country> countryList = countryService.listCountry();
             countryList.forEach(System.out::println);
             System.out.println("Seleccione pais.");
-            String countryId = countryService.listCountry().get(input.nextInt()).getId();
+            String countryId = countryService.listCountry().get(input.nextInt()-1).getId();
             return countryId;
         } catch (Exception e) {
             System.out.println("Error al seleccionar el pais");
