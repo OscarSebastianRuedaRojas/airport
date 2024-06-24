@@ -1,5 +1,6 @@
 package com.airport.Airlines.infrastructure.adapter.in;
 
+import java.util.List;
 import java.util.Scanner;
 import com.airport.Airlines.application.service.AirlinesService;
 import com.airport.Airlines.domain.Airlines;
@@ -63,7 +64,10 @@ public class AirlinesController {
     public Long airlinesList() {
         try {
             System.out.println("Aerolineas registradas");
-            airlinesService.listAirlines();
+            List<Airlines> airlines = airlinesService.listAirlines();
+            for (Airlines airline : airlines) {
+                System.out.println(String.format("%d. %s", airline.getId(), airline.getairline_name()));
+            }
             System.out.println("Seleccione la aerolinea.");
             Long airlineIndex = input.nextLong();
             return airlineIndex;
