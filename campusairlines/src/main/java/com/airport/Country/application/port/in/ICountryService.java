@@ -8,9 +8,5 @@ import com.airport.Country.domain.Country;
  */
 public interface ICountryService {
     Country createCountry(Country country);
-    void updateCountry(String id, String newCountryName);
-    void deleteCountry(String id);
     List<Country> listCountry();
-    Country findCountryById(String id);
-    Country findCountryByName(String countryName);
 }

@@ -1,5 +1,6 @@
 package com.airport.Country.infrastructure.adapter.in;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.airport.Country.domain.Country;
@@ -19,7 +20,9 @@ public class CountryController {
         try {
             System.out.println("Ingrese nombre del pais");
             String CountryName = input.nextLine();
-            Country newCountry = new Country(CountryName);
+            System.out.println("Ingrese id del pais");
+            String countryId = input.nextLine();
+            Country newCountry = new Country(countryId, CountryName);
             Country createdCountry = countryService.createCountry(newCountry);
             if (createdCountry == null) {
                 System.out.println("No se pudo registrar el pais.");
@@ -32,36 +35,11 @@ public class CountryController {
             e.printStackTrace();
         }
     }
-
-    public void updateCountry() {
-        try {
-            String countryId = CountryList();
-            System.out.print("Ingrese el nuevo nombre: ");
-            String newCountryNamw = input.nextLine();
-            countryService.updateCountry(countryId, newCountryNamw);
-        } catch (Exception e) {
-            System.out.println("Ocurrio un error en la solicitud.");
-            e.printStackTrace();
-        }
-    }
-
-    public void deleteCountry() {
-        try {
-            String countryId = CountryList();
-            Country toDeleteCountry = countryService.findCountryById(countryId);
-            System.out.println("Desea eliminar la aerolinea: " + toDeleteCountry.getCountryName()+"?");
-            if (confirmation()) {
-                countryService.deleteCountry(countryId);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public String CountryList() {
         try {
-            System.out.println("Paises registradas");
-            countryService.listCountry();
+            System.out.println("Paises registrados");
+            List <Country> countryList = countryService.listCountry();
+            countryList.forEach(System.out::println);
             System.out.println("Seleccione pais.");
             String countryId = countryService.listCountry().get(input.nextInt()).getId();
             return countryId;

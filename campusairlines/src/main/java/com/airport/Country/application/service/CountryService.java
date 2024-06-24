@@ -30,41 +30,6 @@ public class CountryService implements ICountryService{
     }
 
     @Override
-    public void deleteCountry(String id) {
-        try {
-            countryRepository.delete(id);
-        } catch (Exception e) {
-            System.out.println("Ocurrio una interrupcion del sistema. Reintente.");
-            e.printStackTrace();
-        }
-        
-    }
-
-    @Override
-    public Country findCountryById(String id) {
-        try {
-            Country country = countryRepository.findById(id);
-            return country;
-        } catch (Exception e) {
-            System.out.println("Ocurrio una interrupcion del sistema. Reintente.");
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public Country findCountryByName(String countryName) {
-        try {
-            Country country = countryRepository.findByName(countryName);
-            return country;
-        } catch (Exception e) {
-            System.out.println("Ocurrio una interrupcion del sistema. Reintente.");
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
     public List<Country> listCountry() {
         try {
             List<Country> CountryList = countryRepository.findAll();
@@ -76,15 +41,6 @@ public class CountryService implements ICountryService{
         return null;
     }
 
-    @Override
-    public void updateCountry(String id, String newCountryName) {
-        try {
-            countryRepository.update(id, newCountryName);
-        } catch (Exception e) {
-            System.out.println("Ocurrio una interrupcion del sistema. Reintente.");
-            e.printStackTrace();
-        }
-        
-    }
+
     
 }

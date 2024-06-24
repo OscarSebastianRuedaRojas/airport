@@ -26,50 +26,10 @@ public class CountryRepository implements CountryRepositoryPort{
     }
 
     @Override
-    public Country findById(String id){
-        Country newCountry = new Country();
-        try (Connection connection = DriverManager.getConnection(url,username,password)){
-            String query = "SELECT id, country_name FROM countries WHERE id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                newCountry.setId(resultSet.getString("id"));
-                newCountry.setCountryName(resultSet.getString("country_name"));
-                return newCountry;
-            } 
-        } catch (Exception e) {
-            System.out.println("Error al consultar la base de datos.");
-            e.printStackTrace();
-        }
-        return newCountry;
-    }
-
-    @Override
-    public Country findByName(String countryName) {
-        Country newCountry = new Country();
-        try (Connection connection = DriverManager.getConnection(url,username,password)){
-            String query = "SELECT id, country_name from countries WHERE LOWER(country_name) LiKE LOWER(?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, "%" + countryName + "%");
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                newCountry.setId(resultSet.getString("id"));
-                newCountry.setCountryName(resultSet.getString("country_name"));
-                return newCountry;
-            } 
-        } catch (Exception e) {
-            System.out.println("Error al consultar la base de datos.");
-            e.printStackTrace();
-        }
-        return newCountry;
-    }
-
-    @Override
     public List<Country> findAll() {
         List<Country> country = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)){
-            String query = "SELECT id, country_name FROM Country"; 
+            String query = "SELECT id, country_name FROM countries"; 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
@@ -101,30 +61,9 @@ public class CountryRepository implements CountryRepositoryPort{
         return null;
     }
 
-    @Override
-    public void delete(String id) {
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "DELETE FROM countries WHERE ID = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, id);
-            preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+   
 
-    @Override
-    public void update(String id, String newCountryName) {
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "UPDATE countries SET country?name = ? WHERE id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(2, id);
-            preparedStatement.setString(1, newCountryName);
-            preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+   
 
     
 }

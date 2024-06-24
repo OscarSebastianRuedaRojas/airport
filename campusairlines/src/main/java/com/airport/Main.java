@@ -1,10 +1,10 @@
 package com.airport;
 
-import com.airport.FlightFare.infrastructure.adapter.in.FlightFareController;
+import com.airport.Country.infrastructure.adapter.in.CountryController;
 
 public class Main {
     public static void main(String[] args) {
-        FlightFareController coafadf = new FlightFareController();
-        coafadf.flightFaresList();
+        CountryController troll = new CountryController();
+        troll.CountryList();
     }
 }

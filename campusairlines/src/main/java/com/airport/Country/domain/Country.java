@@ -8,9 +8,12 @@ public class Country {
     private String countryName;
     public Country() {
     }
-    public Country(String countryName) {
+
+    public Country(String id, String countryName) {
+        this.id = id;
         this.countryName = countryName;
     }
+
     public String getId() {
         return id;
     }
@@ -22,6 +25,10 @@ public class Country {
     }
     public void setCountryName(String countryName) {
         this.countryName = countryName;
+    }
+    @Override
+    public String toString() {
+        return "Country [id = " + id + ", countryName = " + countryName + "]";
     }
      
 }
