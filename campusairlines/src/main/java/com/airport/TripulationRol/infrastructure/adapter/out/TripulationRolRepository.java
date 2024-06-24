@@ -45,7 +45,7 @@ public class TripulationRolRepository implements TripulationRolRepositoryPort{
     public List<TripulationRol> findAll() {
         ArrayList<TripulationRol> tripulation_roles = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT id, name FROM tripulation_roles";
+            String query = "SELECT id, rol_name FROM tripulation_roles";
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery(query);
             while (resultset.next()) {

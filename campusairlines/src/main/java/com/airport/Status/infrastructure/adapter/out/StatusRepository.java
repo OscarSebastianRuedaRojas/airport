@@ -43,13 +43,13 @@ public class StatusRepository implements StatusRepositoryPort{
     public List<Status> findAll() {
         List<Status> statuses = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT id, name FROM statuses";
+            String query = "SELECT id, status_name FROM statuses";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 Status status = new Status();
                 status.setId(resultSet.getLong("id"));
-                status.setName(resultSet.getString("name"));
+                status.setName(resultSet.getString("status_name"));
                 statuses.add(status);
             }
             return statuses;
