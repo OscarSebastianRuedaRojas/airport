@@ -52,7 +52,7 @@ public class ModelRepository implements ModelRepositoryPort{
                 Model model = new Model();
                 model.setId(resultSet.getLong("id"));
                 model.setName(resultSet.getString("model"));
-                model.setId_Manufacture(resultSet.getLong("manufacture"));
+                model.setName_Manufacture((resultSet.getString("manufacture")));
                 models.add(model);
             } 
         } catch (Exception e) {

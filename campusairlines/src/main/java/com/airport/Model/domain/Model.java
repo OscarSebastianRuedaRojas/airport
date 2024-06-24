@@ -8,6 +8,7 @@ public class Model {
     private Long id;
     private String name;
     private Long id_Manufacture;
+    private String name_Manufacture;
     
     public Model() {
     }
@@ -40,6 +41,14 @@ public class Model {
 
     public void setId_Manufacture(Long id_Manufacture) {
         this.id_Manufacture = id_Manufacture;
+    }
+
+    public String getName_Manufacture() {
+        return name_Manufacture;
+    }
+
+    public void setName_Manufacture(String name_Manufacture) {
+        this.name_Manufacture = name_Manufacture;
     }
 
     
