@@ -1,10 +1,9 @@
 package com.airport;
-
-import com.airport.Country.infrastructure.adapter.in.CountryController;
+import com.airport.DocumentType.infrastructure.adapter.in.DocumentTypeController;
 
 public class Main {
     public static void main(String[] args) {
-        CountryController troll = new CountryController();
-        troll.CountryList();
+        DocumentTypeController troll = new DocumentTypeController();
+        troll.selectDocumentTypeList();
     }
 }

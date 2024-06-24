@@ -23,6 +23,10 @@ public class DocumentType {
     public void setName(String name) {
         this.name = name;
     }
+    @Override
+    public String toString() {
+        return "DocumentType [id = " + id + ", name = " + name + "]";
+    }
     
     
 }

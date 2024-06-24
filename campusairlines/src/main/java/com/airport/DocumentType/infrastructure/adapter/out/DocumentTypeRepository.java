@@ -29,12 +29,12 @@ public class DocumentTypeRepository implements DocumentTypeRepositoryPort {
     public List<DocumentType> findAll() {
         List<DocumentType> DocumentType = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT id, name FROM document_types";
+            String query = "SELECT id_document_type, name FROM document_types";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 DocumentType newDocumentType = new DocumentType();
-                newDocumentType.setId(resultSet.getLong("id"));
+                newDocumentType.setId(resultSet.getLong("id_document_type"));
                 newDocumentType.setName(resultSet.getString("name"));
                 DocumentType.add(newDocumentType);
             }
@@ -49,7 +49,7 @@ public class DocumentTypeRepository implements DocumentTypeRepositoryPort {
     public DocumentType findById(Long id) {
         DocumentType newDocumentType = new DocumentType();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT id, name FROM document_types WHERE id = ?";
+            String query = "SELECT id_document_type, name FROM document_types WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery(); // no se debe pasar ya que prepared statment ya preparo la consulta
@@ -70,7 +70,7 @@ public class DocumentTypeRepository implements DocumentTypeRepositoryPort {
     @Override
     public DocumentType save(DocumentType documentType) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "INSERT INTO DocumentType VALUES (NULL, ? )";
+            String query = "INSERT INTO document_types VALUES (NULL, ? )";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, documentType.getName());
             preparedStatement.executeUpdate();

@@ -1,5 +1,6 @@
 package com.airport.DocumentType.infrastructure.adapter.in;
 
+import java.util.List;
 import java.util.Scanner;
 import com.airport.DocumentType.application.service.DocumentTypeService;
 import com.airport.DocumentType.domain.DocumentType;
@@ -32,5 +33,26 @@ public class DocumentTypeController {
             e.printStackTrace();
         }
     }
-    
+    public Long selectDocumentTypeList() {
+        try {
+            System.out.println("Tipos registrados");
+            List <DocumentType> docTypesList = documentTypeService.listDocumentType();
+            docTypesList.forEach(System.out::println);
+            System.out.println("Seleccione tipo.");
+            Long tipoId = documentTypeService.listDocumentType().get(input.nextInt()).getId();
+            return tipoId;
+        } catch (Exception e) {
+            System.out.println("Error al seleccionar el tipo");
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public boolean confirmation(){
+        System.out.println("¿Esta seguro de su eleccion?\n\t1. Sí\n\t2. No.");
+        int option = input.nextInt();
+        if (option == 1) {
+            return true;
+        }
+        return false;
+    }
 }
