@@ -1,10 +1,10 @@
 package com.airport;
-import com.airport.FlightFare.infrastructure.adapter.in.FlightFareController;
+import com.airport.TripulationRol.infrastructure.adapter.in.TripulationRolController;
 
 public class Main {
     public static void main(String[] args) {
-        FlightFareController troll = new FlightFareController();
-        troll.registerFlightfare();
-        troll.flightFaresList();
+        TripulationRolController troll = new TripulationRolController();
+        troll.registerTripulationRol();
+        troll.listTripulationRol();
     }
 }
