@@ -6,5 +6,5 @@ import com.airport.Status.domain.Status;
 
 public interface IStatusService {
     Status save(Status status);
-    List<Status> ListStatus(Status status);
+    List<Status> ListStatus();
 }
