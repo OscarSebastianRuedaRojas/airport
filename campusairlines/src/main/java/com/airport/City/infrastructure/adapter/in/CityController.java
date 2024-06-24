@@ -1,5 +1,6 @@
 package com.airport.City.infrastructure.adapter.in;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.airport.City.application.service.CityService;
@@ -40,7 +41,8 @@ public class CityController {
     public String cityList() {
         try {
             System.out.println("Ciudades registradas");
-            cityService.listCity();
+            List<City> cityList = cityService.listCity();
+            cityList.forEach(System.out::println);
             System.out.println("Seleccione la ciudad.");
             String cityIndex = cityService.listCity().get(input.nextInt()-1).getId();
             return cityIndex;
