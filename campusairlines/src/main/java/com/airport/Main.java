@@ -1,13 +1,10 @@
 package com.airport;
-
-
-
-import com.airport.Manufacture.infrastructure.adapter.in.ManufactureController;
-
+import com.airport.FlightFare.infrastructure.adapter.in.FlightFareController;
 
 public class Main {
     public static void main(String[] args) {
-        ManufactureController manufactureController = new ManufactureController();
-        manufactureController.ListManufactures();
+        FlightFareController troll = new FlightFareController();
+        troll.registerFlightfare();
+        troll.flightFaresList();
     }
 }
