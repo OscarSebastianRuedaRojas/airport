@@ -66,7 +66,7 @@ INSERT INTO trips (trip_date, price_trip, departure_city_id, destination_city_id
 ('2024-07-15', 599.99, 'MEX', 'GDL'),
 ('2024-07-20', 699.99, 'RIO', 'SAO');
 
-INSERT INTO AIRPORT (id, airport_name, city_id) VALUES
+INSERT INTO airport (id, airport_name, city_id) VALUES
 ('JFK', 'John F. Kennedy International Airport', 'NYC'),
 ('LAX', 'Los Angeles International Airport', 'LAX'),
 ('YYZ', 'Toronto Pearson International Airport', 'TOR'),
@@ -75,7 +75,7 @@ INSERT INTO AIRPORT (id, airport_name, city_id) VALUES
 ('GIG', 'Galeão International Airport', 'RIO'),
 ('GRU', 'São Paulo–Guarulhos International Airport', 'SAO');
 
-INSERT INTO GATE (gate_number, airport_id) VALUES
+INSERT INTO gate (gate_number, airport_id) VALUES
 ('A1', 'JFK'),
 ('B2', 'LAX'),
 ('C3', 'YYZ'),
