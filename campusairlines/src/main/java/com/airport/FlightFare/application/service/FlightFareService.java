@@ -1,8 +1,6 @@
 package com.airport.FlightFare.application.service;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import com.airport.FlightFare.application.port.in.IFlightFareService;
 import com.airport.FlightFare.domain.FlightFare;
 import com.airport.FlightFare.infrastructure.adapter.out.FlightFareRepository;
@@ -14,7 +12,7 @@ public class FlightFareService implements IFlightFareService {
     private FlightFareRepository flightFareRepository;
     
 
-    public FlightFareService(FlightFareRepository flightFareRepository) {
+    public FlightFareService() {
         this.flightFareRepository = new FlightFareRepository();
     }
 
@@ -33,11 +31,11 @@ public class FlightFareService implements IFlightFareService {
     @Override
     public List<FlightFare> listFlighFares() { 
         try {
-            List<FlightFare> flightFares =flightFareRepository.findAll();
+            List<FlightFare> flightFares = flightFareRepository.findAll();
             return flightFares;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ArrayList<>();
+        return null;
     }
 } 

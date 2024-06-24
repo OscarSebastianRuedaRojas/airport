@@ -39,5 +39,11 @@ public class FlightFare {
     public void setValue(Double value) {
         this.value = value;
     }
-    
+    @Override
+    public String toString() {
+        return "FlightFare [id: " + id + 
+               ", description: " + description + 
+               ", details: " + details + 
+               ", value: " + value + "]";
+    }
 }

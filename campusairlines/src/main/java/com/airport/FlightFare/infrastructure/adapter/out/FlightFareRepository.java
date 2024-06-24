@@ -26,7 +26,7 @@ public class FlightFareRepository implements FlightFareRepositoryPort {
     @Override
     public FlightFare save(FlightFare flightFare) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "INSERT INTO flight_fares VALUES (NULL, ? , ? ,?)";
+            String query = "INSERT INTO flight_fare VALUES (NULL, ? , ? ,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, flightFare.getDescription());
             preparedStatement.setString(2, flightFare.getDetails());
@@ -44,7 +44,7 @@ public class FlightFareRepository implements FlightFareRepositoryPort {
     public List<FlightFare> findAll() {
         List<FlightFare> flightfares = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)){
-            String query = "SELECT id, description, details, value FROM flight_fares"; 
+            String query = "SELECT id, description, details, value FROM flight_fare"; 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
@@ -52,14 +52,14 @@ public class FlightFareRepository implements FlightFareRepositoryPort {
                 newFlightFare.setId(resultSet.getLong("id"));
                 newFlightFare.setDescription(resultSet.getString("description"));
                 newFlightFare.setDetails(resultSet.getString("details"));
-                newFlightFare.setValue(resultSet.getDouble("details"));
+                newFlightFare.setValue(resultSet.getDouble("value"));
                 flightfares.add(newFlightFare);
             }
             return flightfares;
         } catch (Exception e) {
            e.printStackTrace();
         }
-        return flightfares;
+        return null;
     }
 
     
