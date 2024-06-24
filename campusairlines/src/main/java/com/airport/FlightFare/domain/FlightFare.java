@@ -7,10 +7,10 @@ public class FlightFare {
     private long id;
     private String description;
     private String details;
-    private String value;
+    private Double value;
     public FlightFare() {
     }
-    public FlightFare(String description, String details, String value) {
+    public FlightFare(String description, String details, Double value) {
         this.description = description;
         this.details = details;
         this.value = value;
@@ -33,10 +33,10 @@ public class FlightFare {
     public void setDetails(String details) {
         this.details = details;
     }
-    public String getValue() {
+    public Double getValue() {
         return value;
     }
-    public void setValue(String value) {
+    public void setValue(Double value) {
         this.value = value;
     }
     
