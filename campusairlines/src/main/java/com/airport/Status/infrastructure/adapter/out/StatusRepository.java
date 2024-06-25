@@ -19,9 +19,7 @@ public class StatusRepository implements StatusRepositoryPort{
 
     
     public StatusRepository() {
-        this.url = "jdbc:mysql://viaduct.proxy.rlwy.net:47771/airport";
-        this.username = "root";
-        this.password = "uCbNeUCEUrEqhmfXPrWKkWtWDlaPAnrI";
+        
     }
 
     @Override

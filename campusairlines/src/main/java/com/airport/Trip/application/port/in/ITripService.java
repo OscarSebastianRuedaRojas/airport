@@ -1,14 +1,15 @@
-package com.airport.Trip.application.port.out;
+package com.airport.Trip.application.port.in;
 
 import java.util.ArrayList;
 
 import com.airport.Trip.domain.Trip;
 
 /**
- * TripRepositoryPort
+ * ITripService
  */
-public interface TripRepositoryPort {
-    Trip save(Trip trip);
+public interface ITripService {
+
+    Trip register(Trip trip);
     ArrayList<Trip> findAll();
     Trip update(Trip trip, Long id);
     void delete(Long id);
