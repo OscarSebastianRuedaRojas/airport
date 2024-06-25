@@ -1,6 +1,6 @@
 package com.airport.Trip.application.port.out;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.airport.Trip.domain.Trip;
 
@@ -9,8 +9,8 @@ import com.airport.Trip.domain.Trip;
  */
 public interface TripRepositoryPort {
     Trip save(Trip trip);
-    ArrayList<Trip> findAll();
+    List<Trip> findAll();
     Trip update(Trip trip, Long id);
     void delete(Long id);
-    Trip findById(Trip trip);
+    Trip findById(Long id);
 }
