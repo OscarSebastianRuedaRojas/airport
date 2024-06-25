@@ -109,6 +109,7 @@ public class PlaneController {
         try {
             String plates = this.listPlanes();
             Plane plane = new Plane();
+            
             System.out.println("Ingresa la capacidad del Avion: ");
             plane.setCapacity(input.nextInt());
             input.nextLine();
