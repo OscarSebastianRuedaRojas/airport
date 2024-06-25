@@ -8,6 +8,8 @@ import com.airport.City.domain.City;
  * CityService
  */
 public interface ICityService {
+    City getCity(String id);
     City createCity(City city);
     List<City> listCity();
+    
 }

@@ -24,6 +24,27 @@ public class CityRepository implements CityRepositoryPort {
         this.password = "uCbNeUCEUrEqhmfXPrWKkWtWDlaPAnrI";
     }
     @Override
+    public City findById(String id) {
+        try (Connection connection = DriverManager.getConnection(url, username, password)){
+            String query = "SELECT id, city_name, country_id from city WHERE id = ?";
+            PreparedStatement prepareStatement = connection.prepareStatement(query);
+            prepareStatement.setString(1, id);
+            ResultSet resultset = prepareStatement.executeQuery();
+            if (resultset.next()) {
+                City newCity = new City();
+                newCity.setId(resultset.getString("id"));
+                newCity.setName(resultset.getString("city_name"));
+                newCity.setCountryId(resultset.getString("country_id"));
+                return newCity;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al recuperar la ciudades.");
+            e.printStackTrace();
+
+        }
+        return null;
+    }    
+    @Override
     public List<City> findAll() {
         List<City> cityList = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)){

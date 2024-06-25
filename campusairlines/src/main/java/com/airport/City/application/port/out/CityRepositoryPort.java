@@ -7,7 +7,9 @@ import com.airport.City.domain.City;
  * CityRepositoryPort
  */
 public interface CityRepositoryPort {
+    City findById(String id);
 
     City save(City City);
-    List <City> findAll();
+
+    List<City> findAll();
 }

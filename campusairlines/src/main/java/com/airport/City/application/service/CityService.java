@@ -41,5 +41,16 @@ public class CityService implements ICityService {
         return null;
     }
 
+    @Override
+    public City getCity(String id) {
+        try {
+            City newCity = cityRepository.findById(id);
+            return newCity;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     
 }

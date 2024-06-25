@@ -38,6 +38,15 @@ public class CityController {
             e.printStackTrace();
         }
     }
+    public City getCity(String id) {
+        try {
+            City city = cityService.getCity(id);
+            return city;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public String cityList() {
         try {
             System.out.println("Ciudades registradas");
