@@ -33,8 +33,8 @@ public class TripRepository implements TripRepositoryPort {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, trip.getTrip_date());
             preparedStatement.setFloat(2, trip.getPrice_trip());
-            preparedStatement.setLong(3, trip.getDeparture_city_id());
-            preparedStatement.setLong(4, trip.getDestination_city_id());
+            preparedStatement.setString(3, trip.getDeparture_city_id());
+            preparedStatement.setString(4, trip.getDestination_city_id());
             preparedStatement.executeUpdate();
             return trip;
         } catch (Exception e) {
@@ -55,8 +55,8 @@ public class TripRepository implements TripRepositoryPort {
                 trip.setId(resultSet.getLong("id"));
                 trip.setTrip_date(resultSet.getDate("trip_date"));
                 trip.setPrice_trip(resultSet.getFloat("price_trip"));
-                trip.setDeparture_city_id(resultSet.getLong("departure_city_id"));
-                trip.setDestination_city_id(resultSet.getLong("destination_city_id"));
+                trip.setDeparture_city_id(resultSet.getString("departure_city_id"));
+                trip.setDestination_city_id(resultSet.getString("destination_city_id"));
                 trips.add(trip);
             }
         } catch (Exception e) {
@@ -72,8 +72,8 @@ public class TripRepository implements TripRepositoryPort {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, trip.getTrip_date());
             preparedStatement.setFloat(2, trip.getPrice_trip());
-            preparedStatement.setLong(3, trip.getDeparture_city_id());
-            preparedStatement.setLong(4, trip.getDestination_city_id());
+            preparedStatement.setString(3, trip.getDeparture_city_id());
+            preparedStatement.setString(4, trip.getDestination_city_id());
             preparedStatement.setLong(5, id);
             preparedStatement.executeUpdate();
             return trip;
@@ -107,8 +107,8 @@ public class TripRepository implements TripRepositoryPort {
                 trip.setId(resultSet.getLong("id"));
                 trip.setTrip_date(resultSet.getDate("trip_date"));
                 trip.setPrice_trip(resultSet.getFloat("price_trip"));
-                trip.setDeparture_city_id(resultSet.getLong("departure_city_id"));
-                trip.setDestination_city_id(resultSet.getLong("destination_city_id"));
+                trip.setDeparture_city_id(resultSet.getString("departure_city_id"));
+                trip.setDestination_city_id(resultSet.getString("destination_city_id"));
                 return trip;
             }
         } catch (Exception e) {

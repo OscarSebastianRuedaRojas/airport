@@ -10,13 +10,13 @@ public class Trip {
     private Long id;
     private Date trip_date;
     private float price_trip;
-    private Long departure_city_id;
-    private Long destination_city_id;
+    private String departure_city_id;
+    private String destination_city_id;
     
     public Trip() {
     }
 
-    public Trip(Long id, Date trip_date, float price_trip, Long departure_city_id, Long destination_city_id) {
+    public Trip(Long id, Date trip_date, float price_trip, String departure_city_id, String destination_city_id) {
         this.id = id;
         this.trip_date = trip_date;
         this.price_trip = price_trip;
@@ -48,19 +48,19 @@ public class Trip {
         this.price_trip = price_trip;
     }
 
-    public Long getDeparture_city_id() {
+    public String getDeparture_city_id() {
         return departure_city_id;
     }
 
-    public void setDeparture_city_id(Long departure_city_id) {
+    public void setDeparture_city_id(String departure_city_id) {
         this.departure_city_id = departure_city_id;
     }
 
-    public Long getDestination_city_id() {
+    public String getDestination_city_id() {
         return destination_city_id;
     }
 
-    public void setDestination_city_id(Long destination_city_id) {
+    public void setDestination_city_id(String destination_city_id) {
         this.destination_city_id = destination_city_id;
     }
 
