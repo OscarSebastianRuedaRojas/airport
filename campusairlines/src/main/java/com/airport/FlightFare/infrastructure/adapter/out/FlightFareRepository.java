@@ -17,12 +17,13 @@ public class FlightFareRepository implements FlightFareRepositoryPort {
     private String url;
     private String username;
     private String password;
-    
+
     public FlightFareRepository() {
         this.url = "jdbc:mysql://viaduct.proxy.rlwy.net:47771/airport";
         this.username = "root";
         this.password = "uCbNeUCEUrEqhmfXPrWKkWtWDlaPAnrI";
     }
+
     @Override
     public FlightFare save(FlightFare flightFare) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
@@ -43,8 +44,8 @@ public class FlightFareRepository implements FlightFareRepositoryPort {
     @Override
     public List<FlightFare> findAll() {
         List<FlightFare> flightfares = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(url, username, password)){
-            String query = "SELECT id, description, details, value FROM flight_fare"; 
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "SELECT id, description, details, value FROM flight_fare";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
@@ -57,10 +58,43 @@ public class FlightFareRepository implements FlightFareRepositoryPort {
             }
             return flightfares;
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
+        }
+        return null;
+    }
+    @Override
+    public FlightFare findById(Long id) {
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "SELECT id, description, details, value FROM flight_fare WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                FlightFare flightFare = new FlightFare();
+                flightFare.setId(resultSet.getLong("id"));
+                flightFare.setDescription(resultSet.getString("description"));
+                flightFare.setDetails(resultSet.getString("details"));
+                flightFare.setValue(resultSet.getDouble("value"));
+                return flightFare;
+            }
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error al consultar la base de datos. Reintente.");
+            e.printStackTrace();
         }
         return null;
     }
 
-    
+    @Override
+    public void delete(FlightFare flightFare) {
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "DELETE FROM flight_fare WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, flightFare.getId());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error al eliminar en la base de datos. Reintente.");
+            e.printStackTrace();
+        }
+    }
+
 }

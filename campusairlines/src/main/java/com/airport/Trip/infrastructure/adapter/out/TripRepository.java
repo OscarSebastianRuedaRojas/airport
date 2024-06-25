@@ -29,7 +29,7 @@ public class TripRepository implements TripRepositoryPort {
     @Override
     public Trip save(Trip trip) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "INSERT INTO trip VALUES(NULL, ?, ?, ?, ?)";
+            String query = "INSERT INTO trips VALUES(NULL, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, trip.getTrip_date());
             preparedStatement.setFloat(2, trip.getPrice_trip());
@@ -47,7 +47,7 @@ public class TripRepository implements TripRepositoryPort {
     public List<Trip> findAll() {
         List<Trip> trips = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT * FROM trip";
+            String query = "SELECT * FROM trips";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
@@ -68,7 +68,7 @@ public class TripRepository implements TripRepositoryPort {
     @Override
     public Trip update(Trip trip, Long id) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "UPDATE trip SET trip_date = ?, price_trip = ?, departure_city_id = ?, destination_city_id = ? WHERE id = ?";
+            String query = "UPDATE trips SET trip_date = ?, price_trip = ?, departure_city_id = ?, destination_city_id = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, trip.getTrip_date());
             preparedStatement.setFloat(2, trip.getPrice_trip());
@@ -86,7 +86,7 @@ public class TripRepository implements TripRepositoryPort {
     @Override
     public void delete(Long id) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "DELETE FROM trip WHERE id = ?";
+            String query = "DELETE FROM trips WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();

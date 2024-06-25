@@ -1,8 +1,9 @@
 package com.airport;
-import com.airport.City.infrastructure.adapter.in.CityController;
+
+import com.airport.Trip.infrastructure.adapter.in.TripController;
 public class Main {
     public static void main(String[] args) {
-        CityController city = new CityController();
-        city.listCitys();
+        TripController control = new TripController();
+        control.eliminarTrip();
     }
-}
+}~

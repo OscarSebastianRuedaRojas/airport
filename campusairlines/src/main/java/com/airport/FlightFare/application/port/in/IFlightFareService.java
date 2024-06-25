@@ -10,4 +10,7 @@ import com.airport.FlightFare.domain.FlightFare;
 public interface IFlightFareService {
     FlightFare createFlightFare(FlightFare flightFare);
     List<FlightFare> listFlighFares();
+    void deleteFlightFare(FlightFare flightFare);
+    FlightFare findById(Long id);
+    
 }
