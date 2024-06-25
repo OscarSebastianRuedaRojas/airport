@@ -39,6 +39,26 @@ public class DocumentTypeService implements IDocumentTypeService {
         }
         return null;
     }
+
+    @Override
+    public void updateDocumentType(DocumentType documentType) {
+        try {
+            documentTypeRepository.update(documentType.getId(), documentType.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    @Override
+    public DocumentType getDocumentType(Long id) {
+        try {
+            return documentTypeRepository.findById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     
 }

@@ -42,10 +42,21 @@ public class DocumentTypeController {
             Long tipoId = documentTypeService.listDocumentType().get(input.nextInt()-1).getId();
             return tipoId;
         } catch (Exception e) {
-            System.out.println("Error al seleccionar el tipo");
+            System.out.println("Error no existe ese id");
             e.printStackTrace();
         }
         return null;
+    }
+    public void updateDocumentType() {
+        Long documentTypeId = selectDocumentTypeList();
+        DocumentType documentType = documentTypeService.getDocumentType(documentTypeId);
+        System.out.println("Actualizar nombre del tipo de documento: " + documentType.getName());
+        input.nextLine();
+        System.out.println("Escriba nuevo nombre");
+        String newName = input.nextLine();
+        documentType.setName(newName);
+        documentTypeService.updateDocumentType(documentType);
+        System.out.println("Actualizado correctamente a " + documentType.getName());
     }
     public boolean confirmation(){
         System.out.println("¿Esta seguro de su eleccion?\n\t1. Sí\n\t2. No.");
