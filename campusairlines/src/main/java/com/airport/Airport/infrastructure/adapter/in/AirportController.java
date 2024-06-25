@@ -131,4 +131,39 @@ public class AirportController {
         }
         return false;
     }
+    
+    public void mostrarMenuAeropuerto() {
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println("\nMenú de Gestión de Aeropuertos");
+            System.out.println("1. Registrar aeropuerto");
+            System.out.println("2. Consultar información de aeropuerto");
+            System.out.println("3. Eliminar aeropuerto");
+            System.out.println("4. Actualizar datos de aeropuerto");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = input.nextInt();
+            input.nextLine();  // limpiar el buffer
+
+            switch (opcion) {
+                case 1:
+                    this.registerAirport();
+                    break;
+                case 2:
+                    this.getAirportInfo();
+                    break;
+                case 3:
+                    this.deleteAirpot();
+                    break;
+                case 4:
+                    this.updateAirport();
+                    break;
+                case 0:
+                    System.out.println("Saliendo del menú...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intente de nuevo.");
+            }
+        }
+    }
 }

@@ -23,7 +23,7 @@ public class PlaneController {
         this.input = new Scanner(System.in);
     }
 
-    public Plane save(){
+    private Plane save(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         StatusController statusController = new StatusController();
         ModelController modelController = new ModelController();
@@ -72,7 +72,7 @@ public class PlaneController {
         return null;
     }
 
-    public void informacionAvion(){
+    private void informacionAvion(){
         try {
             String plates = this.listPlanes();
             Plane plane = planeService.consultarPlane(plates);
@@ -91,7 +91,7 @@ public class PlaneController {
         }
     }
 
-    public void eliminarAvion(){
+    private void eliminarAvion(){
         try {
             String plates = this.listPlanes();
             planeService.eliminarPlane(plates);
@@ -101,7 +101,7 @@ public class PlaneController {
         }
     }
 
-    public void actualizarAvion(){
+    private void actualizarAvion(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         StatusController statusController = new StatusController();
         ModelController modelController = new ModelController();
@@ -127,6 +127,40 @@ public class PlaneController {
             planeService.UpdatePlane(plates, plane);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public void mostrarMenuAvion() {
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println("\nMenú de Gestión de Aviones");
+            System.out.println("1. Registrar avión");
+            System.out.println("2. Consultar información de avión");
+            System.out.println("3. Eliminar avión");
+            System.out.println("4. Actualizar datos de avión");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = input.nextInt();
+            input.nextLine();  // limpiar el buffer
+
+            switch (opcion) {
+                case 1:
+                    this.save();
+                    break;
+                case 2:
+                    this.informacionAvion();
+                    break;
+                case 3:
+                    this.eliminarAvion();
+                    break;
+                case 4:
+                    this.actualizarAvion();
+                    break;
+                case 0:
+                    System.out.println("Saliendo del menú...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intente de nuevo.");
+            }
         }
     }
 
