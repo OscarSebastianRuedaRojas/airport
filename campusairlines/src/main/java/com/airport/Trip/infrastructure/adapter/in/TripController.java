@@ -56,7 +56,7 @@ public class TripController {
             List<Trip> trips = tripService.listTrips();
             System.out.println("Viajes disponibles:");
             for (Trip trip : trips) {
-                System.out.println(String.format("ID: %d, Fecha: %s, Precio: %.2f", trip.getId(), trip.getTrip_date(), trip.getPrice_trip()));
+                System.out.println(String.format("ID: %d, Fecha: %s, Precio: %.2f Origen: %s  Destino: %s", trip.getId(), trip.getTrip_date(), trip.getPrice_trip(), trip.getDeparture_city_id(), trip.getDestination_city_id()));
             }
             System.out.println("Ingresa el ID del viaje:");
             Long id = input.nextLong();
