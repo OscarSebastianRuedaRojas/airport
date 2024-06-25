@@ -1,6 +1,6 @@
 package com.airport.Trip.infrastructure.adapter.in;
 
-import java.sql.Date;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +8,7 @@ import java.util.Scanner;
 import com.airport.City.infrastructure.adapter.in.CityController;
 import com.airport.Trip.application.service.TripService;
 import com.airport.Trip.domain.Trip;
-import com.airport.Trip.infrastructure.adapter.out.TripRepository;
+
 
 /**
  * TripController
@@ -30,14 +30,17 @@ public class TripController {
         try {
             Trip trip = new Trip();
             System.out.println("Ingresa la fecha del viaje (yyyy-MM-dd): ");
-            trip.setTrip_date(Date.valueOf(input.nextLine()));
+            String dateStr = input.nextLine();
+            java.util.Date utilDate = dateFormat.parse(dateStr);
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            trip.setTrip_date(sqlDate);
             System.out.println("Ingresa el precio del viaje: ");
             trip.setPrice_trip(input.nextFloat());
             input.nextLine();  // limpiar buffer
             System.out.println("Selecciona la ciudad de salida: ");
-            trip.setDeparture_city_id(departureCityController.listCities());
+            trip.setDeparture_city_id(departureCityController.cityList());
             System.out.println("Selecciona la ciudad de destino: ");
-            trip.setDestination_city_id(destinationCityController.listCities());
+            trip.setDestination_city_id(destinationCityController.cityList());
             if (tripService.createTrip(trip) != null) {
                 System.out.println("El viaje fue guardado exitosamente");
             }
@@ -101,14 +104,17 @@ public class TripController {
             Long id = this.listTrips();
             Trip trip = new Trip();
             System.out.println("Ingresa la nueva fecha del viaje (yyyy-MM-dd): ");
-            trip.setTrip_date(Date.valueOf(input.nextLine()));
+            String dateStr = input.nextLine();
+            java.util.Date utilDate = dateFormat.parse(dateStr);
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            trip.setTrip_date(sqlDate);
             System.out.println("Ingresa el nuevo precio del viaje: ");
             trip.setPrice_trip(input.nextFloat());
             input.nextLine();  // limpiar buffer
             System.out.println("Selecciona la nueva ciudad de salida: ");
-            trip.setDeparture_city_id(departureCityController.listCities());
+            trip.setDeparture_city_id(departureCityController.cityList());
             System.out.println("Selecciona la nueva ciudad de destino: ");
-            trip.setDestination_city_id(destinationCityController.listCities());
+            trip.setDestination_city_id(destinationCityController.cityList());
             tripService.updateTrip(id, trip);;
             System.out.println("El viaje fue actualizado exitosamente.");
         } catch (Exception e) {
