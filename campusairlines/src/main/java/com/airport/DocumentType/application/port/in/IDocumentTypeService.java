@@ -11,4 +11,5 @@ public interface IDocumentTypeService {
     List<DocumentType> listDocumentType();
     void updateDocumentType(DocumentType documentType);
     DocumentType getDocumentType(Long id);
+    void deleteDocumentType(DocumentType documentType);
 }

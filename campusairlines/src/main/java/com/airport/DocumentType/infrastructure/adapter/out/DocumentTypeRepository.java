@@ -88,6 +88,7 @@ public class DocumentTypeRepository implements DocumentTypeRepositoryPort {
             String query = "DELETE FROM document_types WHERE id_document_type = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
+            System.out.println("Eliminado el tipo de documento");
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

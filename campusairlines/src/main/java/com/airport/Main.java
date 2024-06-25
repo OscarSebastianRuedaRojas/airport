@@ -1,9 +1,9 @@
 package com.airport;
-import com.airport.Plane.infrastructure.adapter.in.PlaneController;
+import com.airport.DocumentType.infrastructure.adapter.in.DocumentTypeController;
 
 public class Main {
     public static void main(String[] args) {
-        PlaneController troll = new PlaneController();
-        troll.();
+        DocumentTypeController troll = new DocumentTypeController();
+        troll.delete();
     }
 }

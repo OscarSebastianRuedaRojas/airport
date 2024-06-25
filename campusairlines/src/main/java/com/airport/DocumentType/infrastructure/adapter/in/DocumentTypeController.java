@@ -66,4 +66,34 @@ public class DocumentTypeController {
         }
         return false;
     }
+    public void getAll() {
+        try {
+            List<DocumentType> documentTypesList = documentTypeService.listDocumentType();
+            if (documentTypesList == null) {
+                System.out.println("No hay documentos registrados");
+            }
+            documentTypesList.forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void get() {
+        try {
+            System.out.println("Ingrese el id del tipo de documento");
+            Long id = input.nextLong();
+            DocumentType  documentType = documentTypeService.getDocumentType(id);
+            System.out.println(documentType);
+        } catch (Exception e) {
+            e.printStackTrace();        
+        }
+    }
+    public void delete() {
+        try {
+            Long id = selectDocumentTypeList();
+            DocumentType documentType = documentTypeService.getDocumentType(id);
+            documentTypeService.deleteDocumentType(documentType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

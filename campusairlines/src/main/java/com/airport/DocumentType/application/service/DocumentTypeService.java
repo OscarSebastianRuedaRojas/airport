@@ -59,6 +59,12 @@ public class DocumentTypeService implements IDocumentTypeService {
         }
         return null;
     }
-    
+    public void deleteDocumentType(DocumentType documentType){
+        try {
+            documentTypeRepository.delete(documentType.getId());
+        } catch (Exception e) {
+            e.printStackTrace();        
+        }
+    }
     
 }
