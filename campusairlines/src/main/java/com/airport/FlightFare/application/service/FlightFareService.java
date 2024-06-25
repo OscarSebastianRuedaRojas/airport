@@ -38,4 +38,25 @@ public class FlightFareService implements IFlightFareService {
         }
         return null;
     }
+
+    @Override
+    public void deleteFlightFare(FlightFare flightFare) {
+        try {
+            flightFareRepository.delete(flightFare);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    @Override
+    public FlightFare findById(Long id) {
+        try {
+            return flightFareRepository.findById(id);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return null;
+    }
+    
 } 

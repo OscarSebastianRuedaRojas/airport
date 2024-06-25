@@ -10,5 +10,7 @@ import com.airport.FlightFare.domain.FlightFare;
 public interface FlightFareRepositoryPort {
     FlightFare save(FlightFare flightFare);
     List<FlightFare> findAll();
-    
+    void delete(FlightFare flightFare);
+    FlightFare findById(Long id);
+       
 }

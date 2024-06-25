@@ -55,4 +55,16 @@ public class FlightFareController {
         }
         return null;
     }
+    public void deleteFlightFare() {
+        try {
+            Long flightfareId = flightFaresList();
+            FlightFare toDeleteFlightFare = flightFareService.findById(flightfareId);
+            flightFareService.deleteFlightFare(toDeleteFlightFare);
+        } catch (Exception e) {
+            System.out.println("Error al eliminar la tarifa.");
+           e.printStackTrace();
+        }
+        System.out.println("Tarifa eliminada correctamente.");
+    }
+
 }
