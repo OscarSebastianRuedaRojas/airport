@@ -66,5 +66,62 @@ public class FlightFareController {
         }
         System.out.println("Tarifa eliminada correctamente.");
     }
+    public void updateFlightFare() {
+        System.out.println("Seleccione FlightFare a modificar:");
+        // List all FlightFares (assuming you have a method for this)
+        long flightFareIndex = flightFaresList();  FlightFare selectedFlightFare = flightFareService.findById(flightFareIndex);
+        if (selectedFlightFare == null) {
+            System.out.println("FlightFare no encontrado, intente nuevamente.");
+            return;
+        }
+        System.out.println("FlightFare seleccionado: " + selectedFlightFare.getDescription());
 
+        while (true) {
+            try {
+                System.out.println("1. Modificar descripción\n2. Modificar detalles\n3. Modificar valor\n4. Guardar\n5. Regresar");
+                int opc = input.nextInt();
+                input.nextLine();
+
+                switch (opc) {
+                    case 1:
+                        System.out.println("Introduzca nueva descripción:");
+                        String newDescription = input.nextLine();
+                        selectedFlightFare.setDescription(newDescription);
+                        System.out.println("Se configuró la descripción: " + newDescription);
+                        break;
+                    case 2:
+                        System.out.println("Modificar detalles:");
+                        String newDetails = input.nextLine();
+                        selectedFlightFare.setDetails(newDetails);
+                        System.out.println("Se configuraron los detalles: " + newDetails);
+                        break;
+                    case 3:
+                        System.out.println("Modificar valor:");
+                        double newValue = input.nextDouble();
+                        input.nextLine();
+                        selectedFlightFare.setValue(newValue);
+                        System.out.println("Se configuró el valor: " + newValue);
+                        break;
+                    case 4:
+                        try {
+                            flightFareService.updateFlightFare(selectedFlightFare);
+                        } catch (Exception e) {
+                            System.out.println("Ocurrió un error al actualizar la información del FlightFare.");
+                            e.printStackTrace();
+                        }
+                        System.out.println("Información del FlightFare actualizada correctamente.");
+                        return;
+                    case 5:
+                        return;
+                    default:
+                        System.out.println("Opción no válida, intente nuevamente.");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Ocurrió un error: " + e.getMessage());
+                e.printStackTrace();
+                input.nextLine();
+            }
+        }
+    }
 }

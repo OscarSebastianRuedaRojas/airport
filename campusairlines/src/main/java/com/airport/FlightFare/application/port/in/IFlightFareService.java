@@ -12,5 +12,6 @@ public interface IFlightFareService {
     List<FlightFare> listFlighFares();
     void deleteFlightFare(FlightFare flightFare);
     FlightFare findById(Long id);
+    void updateFlightFare(FlightFare flightFare);
     
 }

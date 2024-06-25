@@ -1,9 +1,9 @@
 package com.airport;
 
-import com.airport.Trip.infrastructure.adapter.in.TripController;
+import com.airport.FlightFare.infrastructure.adapter.in.FlightFareController;
 public class Main {
     public static void main(String[] args) {
-        TripController control = new TripController();
-        control.eliminarTrip();
+        FlightFareController control = new FlightFareController();
+        control.deleteFlightFare();
     }
-}~
+}

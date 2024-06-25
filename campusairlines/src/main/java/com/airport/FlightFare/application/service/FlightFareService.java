@@ -54,9 +54,19 @@ public class FlightFareService implements IFlightFareService {
         try {
             return flightFareRepository.findById(id);
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void updateFlightFare(FlightFare flightFare) {
+       try {
+        flightFareRepository.updateFlightFare(flightFare);
+       } catch (Exception e) {
+        e.printStackTrace();
+       }
+        
     }
     
 } 

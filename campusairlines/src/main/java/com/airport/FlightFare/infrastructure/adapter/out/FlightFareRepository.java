@@ -97,4 +97,20 @@ public class FlightFareRepository implements FlightFareRepositoryPort {
         }
     }
 
+    @Override
+    public void updateFlightFare(FlightFare flightFare) {
+       try (Connection connection = DriverManager.getConnection(url, username, password)){
+            String query = "UPDATE flight_fare set description = ?, details = ?, value = ? WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(4, flightFare.getId());
+            preparedStatement.setString(1, flightFare.getDescription());
+            preparedStatement.setString(2, flightFare.getDetails());
+            preparedStatement.setDouble(3, flightFare.getValue());
+            preparedStatement.executeUpdate();
+       } catch (Exception e) {
+        e.printStackTrace();
+       }
+        
+    }
+
 }

@@ -12,5 +12,6 @@ public interface FlightFareRepositoryPort {
     List<FlightFare> findAll();
     void delete(FlightFare flightFare);
     FlightFare findById(Long id);
+    void updateFlightFare(FlightFare flightFare);
        
 }
