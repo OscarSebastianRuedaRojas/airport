@@ -9,4 +9,7 @@ import com.airport.DocumentType.domain.DocumentType;
 public interface IDocumentTypeService {
     DocumentType createDocumentType(DocumentType documentType);
     List<DocumentType> listDocumentType();
+    void updateDocumentType(DocumentType documentType);
+    DocumentType getDocumentType(Long id);
+    void deleteDocumentType(DocumentType documentType);
 }

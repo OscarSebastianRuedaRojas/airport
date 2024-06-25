@@ -61,6 +61,25 @@ public class CountryRepository implements CountryRepositoryPort{
         return null;
     }
 
+    @Override
+    public Country findById(String id) {
+        try (Connection connection = DriverManager.getConnection(url, username, password)){
+            String query = "SELECT id, country_name FROM countries where id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Country newCountry = new Country();
+                newCountry.setId(resultSet.getString("id"));
+                newCountry.setCountryName(resultSet.getString("country_name"));
+                return newCountry;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
    
 
    

@@ -51,16 +51,17 @@ public class PlaneRepository implements PlaneRepositoryPort {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, plates);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Plane plane = new Plane();
-            plane.setId(resultSet.getLong("id"));
-            plane.setPlates(resultSet.getString("matricula"));
-            plane.setCapacity(resultSet.getInt("capacity"));
-            plane.setFabrication_date(resultSet.getDate("fecha_fabricacion"));
-            plane.setStatus(resultSet.getString("estado"));
-            plane.setModel(resultSet.getString("aerolinea"));
-            plane.setModel(resultSet.getString("modelo"));
-            return plane;
-
+            if (resultSet.next()) {
+                Plane plane = new Plane();
+                plane.setId(resultSet.getLong("id"));
+                plane.setPlates(resultSet.getString("matricula"));
+                plane.setCapacity(resultSet.getInt("capacity"));
+                plane.setFabrication_date(resultSet.getDate("fecha_fabricacion"));
+                plane.setStatus(resultSet.getString("estado"));
+                plane.setModel(resultSet.getString("aerolinea"));
+                plane.setModel(resultSet.getString("modelo"));
+                return plane;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -108,7 +109,7 @@ public class PlaneRepository implements PlaneRepositoryPort {
     @Override
     public Plane UpdatePlane(String plates, Plane plane) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "UPDATE plane SET capacity = ?, fabricacion_date = ?, status_id = ?, model_id = ?, airline_id = ? WHERE plates = ?";
+            String query = "UPDATE plane SET capacity = ?, fabrication_date = ?, status_id = ?, model_id = ?, airline_id = ? WHERE plates = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(6, plates);
             preparedStatement.setInt(1, plane.getCapacity());

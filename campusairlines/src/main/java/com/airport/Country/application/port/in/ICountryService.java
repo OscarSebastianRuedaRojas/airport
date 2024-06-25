@@ -9,4 +9,5 @@ import com.airport.Country.domain.Country;
 public interface ICountryService {
     Country createCountry(Country country);
     List<Country> listCountry();
+    Country get(String id);
 }

@@ -49,12 +49,12 @@ public class DocumentTypeRepository implements DocumentTypeRepositoryPort {
     public DocumentType findById(Long id) {
         DocumentType newDocumentType = new DocumentType();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT id_document_type, name FROM document_types WHERE id = ?";
+            String query = "SELECT id_document_type, name FROM document_types WHERE id_document_type = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery(); // no se debe pasar ya que prepared statment ya preparo la consulta
             if (resultSet.next()) {
-                newDocumentType.setId(resultSet.getLong("id"));
+                newDocumentType.setId(resultSet.getLong("id_document_type"));
                 newDocumentType.setName(resultSet.getString("name"));
                 return newDocumentType;
             } else {
@@ -85,9 +85,10 @@ public class DocumentTypeRepository implements DocumentTypeRepositoryPort {
     @Override
     public void delete(Long id) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "DELETE FROM document_types WHERE ID = ?";
+            String query = "DELETE FROM document_types WHERE id_document_type = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
+            System.out.println("Eliminado el tipo de documento");
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,7 +98,7 @@ public class DocumentTypeRepository implements DocumentTypeRepositoryPort {
     @Override
     public void update(Long id, String newTypeName) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "UPDATE document_types SET name = ? WHERE id = ?";
+            String query = "UPDATE document_types SET name = ? WHERE id_document_type = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(2, id);
             preparedStatement.setString(1, newTypeName);

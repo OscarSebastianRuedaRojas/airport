@@ -1,6 +1,5 @@
 package com.airport.Plane.infrastructure.adapter.in;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
@@ -37,7 +36,10 @@ public class PlaneController {
             plane.setCapacity(input.nextInt());
             input.nextLine();
             System.out.println("Ingresa la fecha de fabricacion del Avion(yyyy-MM-dd): ");
-            plane.setFabrication_date((Date) dateFormat.parse(input.nextLine()) );
+            String dateStr = input.nextLine();
+            java.util.Date utilDate = dateFormat.parse(dateStr);
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            plane.setFabrication_date(sqlDate);
             System.out.println("Selecciona el estado del Avion: ");
             plane.setStatus_id(statusController.listStatuses());
             System.out.println("Selecciona el modelo del Avion: ");
@@ -61,7 +63,7 @@ public class PlaneController {
             for (Plane plane : planes) {
                 System.out.println(String.format("%s %d", plane.getPlates(), plane.getCapacity()));
             }
-            String plates = input.nextLine();
+            String plates = input.nextLine().toUpperCase();
             return plates;
 
         } catch (Exception e) {
@@ -107,13 +109,15 @@ public class PlaneController {
         try {
             String plates = this.listPlanes();
             Plane plane = new Plane();
-            System.out.println("Ingresa la matricula del Avion: ");
-            plane.setPlates(input.nextLine());
+            
             System.out.println("Ingresa la capacidad del Avion: ");
             plane.setCapacity(input.nextInt());
             input.nextLine();
             System.out.println("Ingresa la fecha de fabricacion del Avion(yyyy-MM-dd): ");
-            plane.setFabrication_date((Date) dateFormat.parse(input.nextLine()) );
+            String dateStr = input.nextLine();
+            java.util.Date utilDate = dateFormat.parse(dateStr);
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            plane.setFabrication_date(sqlDate);
             System.out.println("Selecciona el estado del Avion: ");
             plane.setStatus_id(statusController.listStatuses());
             System.out.println("Selecciona el modelo del Avion: ");

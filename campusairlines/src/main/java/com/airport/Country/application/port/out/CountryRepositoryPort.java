@@ -9,5 +9,6 @@ import com.airport.Country.domain.Country;
 public interface CountryRepositoryPort {
     List<Country> findAll();
     Country save(Country country);
+    Country findById(String id);
 
 }
