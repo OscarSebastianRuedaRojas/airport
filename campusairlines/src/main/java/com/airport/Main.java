@@ -1,10 +1,9 @@
 package com.airport;
-import com.airport.FlightFare.infrastructure.adapter.in.FlightFareController;
+import com.airport.Airport.infrastructure.adapter.in.AirportController;
 
 public class Main {
     public static void main(String[] args) {
-        FlightFareController troll = new FlightFareController();
-        troll.registerFlightfare();
-        troll.flightFaresList();
+        AirportController troll = new AirportController();
+        troll.updateAirport();
     }
 }

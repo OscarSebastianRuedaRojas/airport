@@ -8,4 +8,10 @@ import com.airport.Airport.domain.Airport;
  */
 public interface AirportRepositoryPort {
     List<Airport> findAll();
+    Airport save(Airport airport);
+    Airport findById(String id);
+    void update(Airport airport);
+    void delete(Airport airport);
+    
+
 }

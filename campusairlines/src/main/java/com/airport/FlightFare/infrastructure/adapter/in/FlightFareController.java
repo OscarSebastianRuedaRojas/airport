@@ -47,7 +47,7 @@ public class FlightFareController {
             List<FlightFare> flightFaresList = flightFareService.listFlighFares();
             flightFaresList.forEach(System.out::println);
             System.out.println("Seleccione la tarifa.");
-            Long flightFareIndex = input.nextLong();
+            Long flightFareIndex = flightFareService.listFlighFares().get(input.nextInt()-1).getId();
             return flightFareIndex;
         } catch (Exception e) {
             System.out.println("Error al seleccionar la tarifa");

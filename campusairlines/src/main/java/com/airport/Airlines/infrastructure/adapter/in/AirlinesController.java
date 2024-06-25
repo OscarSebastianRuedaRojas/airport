@@ -69,7 +69,7 @@ public class AirlinesController {
                 System.out.println(String.format("%d. %s", airline.getId(), airline.getairline_name()));
             }
             System.out.println("Seleccione la aerolinea.");
-            Long airlineIndex = input.nextLong();
+            Long airlineIndex = airlinesService.listAirlines().get(input.nextInt()-1).getId();
             return airlineIndex;
         } catch (Exception e) {
             System.out.println("Error al seleccionar la aerolinea");
