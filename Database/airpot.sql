@@ -108,7 +108,7 @@ CREATE Table revisions (
 
 CREATE TABLE employees(
     id VARCHAR(20) PRIMARY KEY,
-    emplyee_name VARCHAR(40),
+    employee_name VARCHAR(40),
     rol_id int,
     admission_date date,
     airline_id int,
