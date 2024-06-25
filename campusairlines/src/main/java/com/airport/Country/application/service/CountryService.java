@@ -41,6 +41,16 @@ public class CountryService implements ICountryService{
         return null;
     }
 
+    @Override
+    public Country get(String id) {
+        try {
+            return countryRepository.findById(id);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return null;
+    }
+
 
     
 }

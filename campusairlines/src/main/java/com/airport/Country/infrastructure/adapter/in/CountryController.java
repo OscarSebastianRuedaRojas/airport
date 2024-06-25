@@ -57,5 +57,8 @@ public class CountryController {
         }
         return false;
     }
-    
+    public Country get(String id) {
+        Country country = countryService.get(id);
+        return country;
+    }
 }

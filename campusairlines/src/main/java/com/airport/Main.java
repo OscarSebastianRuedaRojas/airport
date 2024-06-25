@@ -1,9 +1,8 @@
 package com.airport;
-import com.airport.DocumentType.infrastructure.adapter.in.DocumentTypeController;
-
+import com.airport.City.infrastructure.adapter.in.CityController;
 public class Main {
     public static void main(String[] args) {
-        DocumentTypeController troll = new DocumentTypeController();
-        troll.delete();
+        CityController city = new CityController();
+        city.listCitys();
     }
 }

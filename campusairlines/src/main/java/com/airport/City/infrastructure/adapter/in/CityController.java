@@ -53,8 +53,8 @@ public class CityController {
             List<City> cityList = cityService.listCity();
             cityList.forEach(System.out::println);
             System.out.println("Seleccione la ciudad.");
-            String cityIndex = cityService.listCity().get(input.nextInt()-1).getId();
-            return cityIndex;
+            String cityId = cityService.listCity().get(input.nextInt()-1).getId();
+            return cityId;
         } catch (Exception e) {
             System.out.println("Error al seleccionar la ciudad");
             e.printStackTrace();
@@ -68,5 +68,11 @@ public class CityController {
             return true;
         }
         return false;
+    }
+    public void listCities() {
+        List<City> cities = cityService.listCity();
+        cities.forEach(city -> {
+            System.out.println("id:"+city.getId()+ "Nombre: "+ city.getName()+ "Pais:"+ countryController.get(city.getCountryId()).getCountryName());
+        });
     }
 }
