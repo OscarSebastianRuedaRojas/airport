@@ -8,6 +8,6 @@ import com.airport.Plane.domain.Plane;
 public interface IPlaneService {
     Plane save(Plane plane);
     Plane consultarPlane(String plates);
-    Plane eliminarPlane(String plates);
+    void eliminarPlane(String plates);
     Plane UpdatePlane(String plates, Plane plane);
 }
