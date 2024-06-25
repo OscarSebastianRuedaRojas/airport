@@ -12,8 +12,11 @@ public class Plane {
     private int capacity;
     private Date fabrication_date;
     private Long status_id;
+    private String status;
     private Long model_id;
+    private String model;
     private Long airline_id;
+    private String airline;
 
     public Plane() {
     }
@@ -83,6 +86,30 @@ public class Plane {
 
     public void setAirline_id(Long airline_id) {
         this.airline_id = airline_id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getAirline() {
+        return airline;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
     }
     
 
