@@ -4,15 +4,19 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+import com.airport.Plane.domain.Plane;
+import com.airport.Plane.infrastructure.adapter.in.PlaneController;
 import com.airport.Revision.application.service.RevisionService;
 import com.airport.Revision.domain.Revision;
 
 public class RevisionController {
     private RevisionService revisionService;
+    private PlaneController planeController;
     private Scanner input;
 
     public RevisionController() {
         this.revisionService = new RevisionService();
+        this.planeController = new PlaneController();
         this.input = new Scanner(System.in);
     }
 
@@ -21,8 +25,9 @@ public class RevisionController {
         try {
             System.out.println("Ingresa la fecha de la revisión (YYYY-MM-DD):");
             revision.setRevisionDate(LocalDate.parse(input.nextLine()));
-            System.out.println("Ingresa el ID del avión:");
-            revision.setPlaneId(input.nextLong());
+            String plates = planeController.listPlanes();
+            Plane plane = planeController.getPlane(plates);
+            revision.setPlaneId(plane.getId());
             input.nextLine(); // Consume el newline
             Revision revision2 = revisionService.createRevision(revision);
             if (revision2 == null) {
@@ -66,8 +71,9 @@ public class RevisionController {
             }
             System.out.println("Ingresa la nueva fecha de la revisión (YYYY-MM-DD):");
             revision.setRevisionDate(LocalDate.parse(input.nextLine()));
-            System.out.println("Ingresa el nuevo ID del avión:");
-            revision.setPlaneId(input.nextLong());
+            String plates = planeController.listPlanes();
+            Plane plane = planeController.getPlane(plates);
+            revision.setPlaneId(plane.getId());
             input.nextLine(); // Consume el newline
             revisionService.updateRevision(revision);
             System.out.println("Revisión actualizada exitosamente.");
@@ -79,13 +85,9 @@ public class RevisionController {
 
     public void deleteRevision() {
         try {
-            System.out.println("Ingresa el ID de la revisión a eliminar:");
-            Long id = input.nextLong();
-            input.nextLine(); // Consume el newline
+            Long id = listRevisions();
             revisionService.deleteRevision(id);
-            System.out.println("Revisión eliminada exitosamente.");
         } catch (Exception e) {
-            System.out.println("Ocurrió un error al eliminar la revisión.");
             e.printStackTrace();
         }
     }

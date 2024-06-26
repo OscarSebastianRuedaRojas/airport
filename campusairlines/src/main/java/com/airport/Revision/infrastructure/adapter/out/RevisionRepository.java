@@ -108,6 +108,7 @@ public class RevisionRepository implements RevisionRepositoryPort {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
+            System.out.println("Error: No se pueden eliminar revisiones asignadas a un empleado.");
             e.printStackTrace();
         }
     }
