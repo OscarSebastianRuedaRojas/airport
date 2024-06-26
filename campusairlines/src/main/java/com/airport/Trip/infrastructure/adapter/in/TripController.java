@@ -121,4 +121,39 @@ public class TripController {
             e.printStackTrace();
         }
     }
+    
+    public void mostrarMenuTrip() {
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println("\nMenú de Gestión de Viajes");
+            System.out.println("1. Registrar viaje");
+            System.out.println("2. Consultar información de viaje");
+            System.out.println("3. Eliminar viaje");
+            System.out.println("4. Actualizar datos de viaje");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = input.nextInt();
+            input.nextLine();  // limpiar el buffer
+
+            switch (opcion) {
+                case 1:
+                    this.save();
+                    break;
+                case 2:
+                    this.informacionTrip();
+                    break;
+                case 3:
+                    this.eliminarTrip();
+                    break;
+                case 4:
+                    this.actualizarTrip();
+                    break;
+                case 0:
+                    System.out.println("Saliendo del menú...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intente de nuevo.");
+            }
+        }
+    }
 }
