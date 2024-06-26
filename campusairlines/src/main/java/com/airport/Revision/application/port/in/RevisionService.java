@@ -13,5 +13,6 @@ public interface RevisionService {
     List<Revision> getAllRevisions();
     void updateRevisiom(Revision revision);
     void deleteRevision(Long id);
+    Revision getRevisionByPlanePlate(String plate);
 
 }

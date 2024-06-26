@@ -8,6 +8,7 @@ import com.airport.Plane.domain.Plane;
 import com.airport.Plane.infrastructure.adapter.in.PlaneController;
 import com.airport.Revision.application.service.RevisionService;
 import com.airport.Revision.domain.Revision;
+import com.airport.Revision.domain.RevisionDTO;
 
 public class RevisionController {
     private RevisionService revisionService;
@@ -104,5 +105,14 @@ public class RevisionController {
             }
         });
         return flag[0];
+    }
+    public void getRevisionByPlanePlate() {
+        try {
+            String plate = planeController.listPlanes();
+            List<RevisionDTO> planeRevisions = revisionService.getRevisionByPlanePlate(plate);
+            planeRevisions.forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
