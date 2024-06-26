@@ -6,7 +6,7 @@ CREATE TABLE document_types (
     name VARCHAR(255)   
 );
 
-CREATE TABLE costumer (
+CREATE TABLE customer (
     id VARCHAR(20) PRIMARY KEY,
     costumer_name VARCHAR(30),
     costumer_age INT,

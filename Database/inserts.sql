@@ -3,7 +3,7 @@ INSERT INTO document_types (name) VALUES
 ('National ID'),
 ('Driver License');
 
-INSERT INTO costumer (id, costumer_name, costumer_age, document_type_id) VALUES
+INSERT INTO customer (id, costumer_name, costumer_age, document_type_id) VALUES
 ('123456789', 'John Doe', 34, 1),
 ('987654321', 'Jane Smith', 28, 2),
 ('112233445', 'Robert Brown', 45, 3),
@@ -109,7 +109,7 @@ INSERT INTO revisions (revision_date, plane_id) VALUES
 ('2024-06-10', 2),
 ('2024-06-15', 3);
 
-INSERT INTO employees (id, emplyee_name, rol_id, admission_date, airline_id, airport_id) VALUES
+INSERT INTO employees (id, employee_name, rol_id, admission_date, airline_id, airport_id) VALUES
 ('567890123', 'Alice Johnson', 1, '2018-03-12', 1, 'JFK'),
 ('234567890', 'Bob Wilson', 2, '2017-06-25', 2, 'LAX'),
 ('345678901', 'Charlie Davis', 3, '2019-11-05', 3, 'YYZ'),
