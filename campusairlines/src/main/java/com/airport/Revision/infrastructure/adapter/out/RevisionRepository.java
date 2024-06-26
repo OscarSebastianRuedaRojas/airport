@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.airport.Revision.application.port.out.RevisionRepositoryPort;
 import com.airport.Revision.domain.Revision;
+import com.airport.Revision.domain.RevisionDTO;
 
 public class RevisionRepository implements RevisionRepositoryPort {
 
@@ -111,5 +112,46 @@ public class RevisionRepository implements RevisionRepositoryPort {
             System.out.println("Error: No se pueden eliminar revisiones asignadas a un empleado.");
             e.printStackTrace();
         }
+    }
+    @Override
+    public List<RevisionDTO> findByPlanePlate(String plate) {
+        List<RevisionDTO> planeRevision = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            String query = "SELECT revem.id AS revemployee_id, e.employee_name, e.rol_id, e.admission_date, e.airline_id, e.airport_id, " +
+                           "red.description, r.id AS revision_id, r.revision_date, r.plane_id, " +
+                           "p.plates, p.capacity, p.fabrication_date, p.status_id, p.model_id " +
+                           "FROM revemployee AS revem " +
+                           "INNER JOIN employees e ON revem.id_employee = e.id " +
+                           "INNER JOIN revisions_details red ON revem.id = red.revemployee_id " +
+                           "INNER JOIN revisions r ON revem.id_revision = r.id " +
+                           "INNER JOIN plane p ON r.plane_id = p.id " +
+                           "WHERE p.plates = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, plate);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                RevisionDTO revisionDTO = new RevisionDTO();
+                revisionDTO.setId(resultSet.getLong("revemployee_id"));
+                revisionDTO.setEmployeeName(resultSet.getString("employee_name"));
+                revisionDTO.setRolId(resultSet.getInt("rol_id"));
+                revisionDTO.setAdmissionDate(resultSet.getDate("admission_date").toLocalDate());
+                revisionDTO.setAirlineId(resultSet.getInt("airline_id"));
+                revisionDTO.setAirportId(resultSet.getString("airport_id"));
+                revisionDTO.setDescription(resultSet.getString("description"));
+                revisionDTO.setRevisionDate(resultSet.getDate("revision_date").toLocalDate());
+                revisionDTO.setPlaneId(resultSet.getLong("plane_id"));
+                revisionDTO.setPlates(resultSet.getString("plates"));
+                revisionDTO.setCapacity(resultSet.getInt("capacity"));
+                revisionDTO.setFabricationDate(resultSet.getDate("fabrication_date").toLocalDate());
+                revisionDTO.setStatusId(resultSet.getInt("status_id"));
+                revisionDTO.setModelId(resultSet.getInt("model_id"));
+                planeRevision.add(revisionDTO);
+            }
+            return planeRevision;
+        } catch (Exception e) {
+            System.out.println("Error al consultar revisiones por matricula de avion");
+            e.printStackTrace();
+        }
+        return null;
     }
 }
