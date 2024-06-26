@@ -1,13 +1,13 @@
-package com.airport.Customer.application.port.out;
+package com.airport.Customer.application.port.in;
 
 import java.util.List;
 
 import com.airport.Customer.domain.Customer;
 
 /**
- * CustomerRepositoryPort
+ * ICustomerService
  */
-public interface CustomerRepositoryPort {
+public interface ICustomerService {
 
     Customer save(Customer customer);
     Customer findById(String id);
