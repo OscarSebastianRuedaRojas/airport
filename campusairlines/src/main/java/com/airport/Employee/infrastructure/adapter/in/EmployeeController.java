@@ -52,7 +52,7 @@ public class EmployeeController {
         return null;
     }
 
-    public void listEmployees() {
+    public String listEmployees() {
         try {
             List<Employee> employees = employeeService.listEmployees();
             System.out.println("Empleados registrados:");
@@ -61,9 +61,11 @@ public class EmployeeController {
                         employee.getId(), employee.getEmployee_name(), employee.getRol_id(), employee.getAdmission_date().toString(),
                         employee.getAirline_id(), employee.getAirport_id()));
             }
+            return input.nextLine();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public void informacionEmployee() {

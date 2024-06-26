@@ -1,13 +1,13 @@
-package com.airport.TripCrew.application.port.out;
+package com.airport.TripCrew.application.port.in;
 
 import java.util.List;
 
 import com.airport.TripCrew.domain.TripCrew;
 
 /**
- * TripCrewRepositoryPort
+ * TripCrewService
  */
-public interface TripCrewRepositoryPort {
+public interface ITripCrewService {
 
     TripCrew save(TripCrew tripCrew);
     TripCrew findById(String employeeId, Long connectionId);
