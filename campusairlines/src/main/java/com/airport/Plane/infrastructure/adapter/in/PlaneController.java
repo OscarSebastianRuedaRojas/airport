@@ -23,11 +23,7 @@ public class PlaneController {
         this.input = new Scanner(System.in);
     }
 
-<<<<<<< HEAD
     private Plane save(){
-=======
-    public Plane save() {
->>>>>>> Felipe
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         StatusController statusController = new StatusController();
         ModelController modelController = new ModelController();
@@ -76,11 +72,7 @@ public class PlaneController {
         return null;
     }
 
-<<<<<<< HEAD
     private void informacionAvion(){
-=======
-    public void informacionAvion() {
->>>>>>> Felipe
         try {
             String plates = this.listPlanes();
             Plane plane = planeService.consultarPlane(plates);
@@ -99,11 +91,7 @@ public class PlaneController {
         }
     }
 
-<<<<<<< HEAD
     private void eliminarAvion(){
-=======
-    public void eliminarAvion() {
->>>>>>> Felipe
         try {
             String plates = this.listPlanes();
             planeService.eliminarPlane(plates);
@@ -113,11 +101,7 @@ public class PlaneController {
         }
     }
 
-<<<<<<< HEAD
     private void actualizarAvion(){
-=======
-    public void actualizarAvion() {
->>>>>>> Felipe
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         StatusController statusController = new StatusController();
         ModelController modelController = new ModelController();

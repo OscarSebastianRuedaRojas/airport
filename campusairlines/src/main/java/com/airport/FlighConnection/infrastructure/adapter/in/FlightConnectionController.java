@@ -106,4 +106,39 @@ public class FlightConnectionController {
             e.printStackTrace();
         }
     }
+    
+    public void mostrarMenuFlightConnection() {
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println("\nMenú de Gestión de Conexiones de Vuelo");
+            System.out.println("1. Registrar conexión de vuelo");
+            System.out.println("2. Consultar información de conexión de vuelo");
+            System.out.println("3. Eliminar conexión de vuelo");
+            System.out.println("4. Actualizar datos de conexión de vuelo");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = input.nextInt();
+            input.nextLine();  // limpiar el buffer
+
+            switch (opcion) {
+                case 1:
+                    save();
+                    break;
+                case 2:
+                    informacionFlightConnection();
+                    break;
+                case 3:
+                    eliminarFlightConnection();
+                    break;
+                case 4:
+                    actualizarFlightConnection();
+                    break;
+                case 0:
+                    System.out.println("Saliendo del menú...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intente de nuevo.");
+            }
+        }
+    }
 }
