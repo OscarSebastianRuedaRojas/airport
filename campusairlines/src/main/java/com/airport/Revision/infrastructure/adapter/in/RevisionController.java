@@ -28,12 +28,15 @@ public class RevisionController {
             String plates = planeController.listPlanes();
             Plane plane = planeController.getPlane(plates);
             revision.setPlaneId(plane.getId());
-            input.nextLine(); // Consume el newline
-            Revision revision2 = revisionService.createRevision(revision);
-            if (revision2 == null) {
-                System.out.println("Hubo un error al guardar la revisión.");
+            if (verification(revision)) {
+                System.out.println("La revision: " + revision + " ya esxiste.");
             } else {
-                System.out.println("Revisión guardada exitosamente.");
+                Revision revision2 = revisionService.createRevision(revision);
+                if (revision2 == null) {
+                    System.out.println("Hubo un error al guardar la revisión.");
+                } else {
+                    System.out.println("Revisión guardada exitosamente.");
+                }
             }
         } catch (Exception e) {
             System.out.println("Ocurrió un error al guardar la revisión.");
@@ -47,7 +50,7 @@ public class RevisionController {
             System.out.println("Revisiones disponibles: ");
             List<Revision> revisions = revisionService.listRevisions();
             for (Revision revision : revisions) {
-                System.out.println(String.format("%d. Fecha: %s, ID del avión: %d", 
+                System.out.println(String.format("%d. Fecha: %s, ID del avión: %d",
                         revision.getId(), revision.getRevisionDate().toString(), revision.getPlaneId()));
             }
             System.out.println("Selecciona el id:");
@@ -90,5 +93,16 @@ public class RevisionController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean verification(Revision newRevision) {
+        List<Revision> revisions = revisionService.listRevisions();
+        boolean[] flag = {false};
+        revisions.forEach(revision -> {
+            if (revision.getRevisionDate().equals(newRevision.getRevisionDate()) && revision.getPlaneId().equals(newRevision.getPlaneId())) {
+                flag[0] = true;
+            }
+        });
+        return flag[0];
     }
 }

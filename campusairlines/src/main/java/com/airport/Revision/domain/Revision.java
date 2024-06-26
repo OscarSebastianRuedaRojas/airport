@@ -34,5 +34,9 @@ public class Revision {
     public void setPlaneId(Long planeId) {
         this.planeId = planeId;
     }
+    @Override
+    public String toString() {
+        return "Revision [id=" + id + ", revisionDate=" + revisionDate + ", planeId=" + planeId + "]";
+    }
     
 }
