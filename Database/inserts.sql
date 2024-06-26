@@ -3,7 +3,7 @@ INSERT INTO document_types (name) VALUES
 ('National ID'),
 ('Driver License');
 
-INSERT INTO customer (id, costumer_name, costumer_age, document_type_id) VALUES
+INSERT INTO customer (id, customer_name, customer_age, document_type_id) VALUES
 ('123456789', 'John Doe', 34, 1),
 ('987654321', 'Jane Smith', 28, 2),
 ('112233445', 'Robert Brown', 45, 3),
@@ -147,7 +147,7 @@ INSERT INTO trip_booking (date, trip_id) VALUES
 ('2024-06-23', 4),
 ('2024-06-24', 5);
 
-INSERT INTO trip_booking_details (trip_booking_id, costumer_id, fares_id) VALUES
+INSERT INTO trip_booking_details (trip_booking_id, customer_id, fares_id) VALUES
 (1, '123456789', 1),
 (2, '987654321', 2),
 (3, '112233445', 3),

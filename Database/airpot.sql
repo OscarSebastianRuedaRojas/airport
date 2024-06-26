@@ -8,8 +8,8 @@ CREATE TABLE document_types (
 
 CREATE TABLE customer (
     id VARCHAR(20) PRIMARY KEY,
-    costumer_name VARCHAR(30),
-    costumer_age INT,
+    customer_name VARCHAR(30),
+    customer_age INT,
     document_type_id INT,
     CONSTRAINT fk_document_type_id_costumer FOREIGN KEY (document_type_id) REFERENCES document_types(id_document_type)
 );
@@ -161,9 +161,9 @@ CREATE TABLE trip_booking (
 CREATE TABLE trip_booking_details (
     id INT PRIMARY KEY auto_increment,
     trip_booking_id INT,
-    costumer_id VARCHAR(20),
+    customer_id VARCHAR(20),
     fares_id int,
     CONSTRAINT fk_trip_booking_id Foreign Key (trip_booking_id) REFERENCES trip_booking(id),
-    CONSTRAINT fk_costumer_id Foreign Key (costumer_id) REFERENCES costumer(id),
+    CONSTRAINT fk_costumer_id Foreign Key (customer_id) REFERENCES customer(id),
     CONSTRAINT fk_fares_id Foreign Key (fares_id) REFERENCES flight_fare(id)
 );
