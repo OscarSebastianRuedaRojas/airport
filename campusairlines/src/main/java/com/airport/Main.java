@@ -1,9 +1,10 @@
 package com.airport;
 
-import com.airport.FlightFare.infrastructure.adapter.in.FlightFareController;
+import com.airport.Revision.infrastructure.adapter.in.RevisionController;
 public class Main {
     public static void main(String[] args) {
-        FlightFareController control = new FlightFareController();
-        control.deleteFlightFare();
+        RevisionController control = new RevisionController();
+        // control.registerRevision();
+        control.deleteRevision();
     }
 }

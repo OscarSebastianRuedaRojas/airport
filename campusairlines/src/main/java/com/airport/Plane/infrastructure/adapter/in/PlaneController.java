@@ -23,7 +23,11 @@ public class PlaneController {
         this.input = new Scanner(System.in);
     }
 
+<<<<<<< HEAD
     private Plane save(){
+=======
+    public Plane save() {
+>>>>>>> Felipe
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         StatusController statusController = new StatusController();
         ModelController modelController = new ModelController();
@@ -56,7 +60,7 @@ public class PlaneController {
         return null;
     }
 
-    public String listPlanes(){
+    public String listPlanes() {
         try {
             List<Plane> planes = planeService.findAll();
             System.out.println("Ingresa la matricula del avion:");
@@ -72,7 +76,11 @@ public class PlaneController {
         return null;
     }
 
+<<<<<<< HEAD
     private void informacionAvion(){
+=======
+    public void informacionAvion() {
+>>>>>>> Felipe
         try {
             String plates = this.listPlanes();
             Plane plane = planeService.consultarPlane(plates);
@@ -83,15 +91,19 @@ public class PlaneController {
             System.out.println("La informacion del Avion con matricula: " + plane.getPlates());
             System.out.println("Capacidad: " + plane.getCapacity());
             System.out.println("Fecha de fabricacion " + plane.getFabrication_date());
-            System.out.println("Estado: "+ plane.getStatus());
-            System.out.println("Modelo "+ plane.getModel());
-            System.out.println("Aerolinea: "+ plane.getAirline()); 
+            System.out.println("Estado: " + plane.getStatus());
+            System.out.println("Modelo " + plane.getModel());
+            System.out.println("Aerolinea: " + plane.getAirline());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+<<<<<<< HEAD
     private void eliminarAvion(){
+=======
+    public void eliminarAvion() {
+>>>>>>> Felipe
         try {
             String plates = this.listPlanes();
             planeService.eliminarPlane(plates);
@@ -101,7 +113,11 @@ public class PlaneController {
         }
     }
 
+<<<<<<< HEAD
     private void actualizarAvion(){
+=======
+    public void actualizarAvion() {
+>>>>>>> Felipe
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         StatusController statusController = new StatusController();
         ModelController modelController = new ModelController();
@@ -109,7 +125,7 @@ public class PlaneController {
         try {
             String plates = this.listPlanes();
             Plane plane = new Plane();
-            
+
             System.out.println("Ingresa la capacidad del Avion: ");
             plane.setCapacity(input.nextInt());
             input.nextLine();
@@ -164,4 +180,13 @@ public class PlaneController {
         }
     }
 
+    public Plane getPlane(String plates) {
+        try {
+            return planeService.consultarPlane(plates);
+        } catch (Exception e) {
+            System.out.println("Erro al consultar avion por matricula.");
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

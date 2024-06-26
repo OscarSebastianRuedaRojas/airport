@@ -1,0 +1,94 @@
+package com.airport.Revision.infrastructure.adapter.in;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Scanner;
+
+import com.airport.Plane.domain.Plane;
+import com.airport.Plane.infrastructure.adapter.in.PlaneController;
+import com.airport.Revision.application.service.RevisionService;
+import com.airport.Revision.domain.Revision;
+
+public class RevisionController {
+    private RevisionService revisionService;
+    private PlaneController planeController;
+    private Scanner input;
+
+    public RevisionController() {
+        this.revisionService = new RevisionService();
+        this.planeController = new PlaneController();
+        this.input = new Scanner(System.in);
+    }
+
+    public void registerRevision() {
+        Revision revision = new Revision();
+        try {
+            System.out.println("Ingresa la fecha de la revisión (YYYY-MM-DD):");
+            revision.setRevisionDate(LocalDate.parse(input.nextLine()));
+            String plates = planeController.listPlanes();
+            Plane plane = planeController.getPlane(plates);
+            revision.setPlaneId(plane.getId());
+            input.nextLine(); // Consume el newline
+            Revision revision2 = revisionService.createRevision(revision);
+            if (revision2 == null) {
+                System.out.println("Hubo un error al guardar la revisión.");
+            } else {
+                System.out.println("Revisión guardada exitosamente.");
+            }
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error al guardar la revisión.");
+            e.printStackTrace();
+        }
+        input.nextLine();
+    }
+
+    public Long listRevisions() {
+        try {
+            System.out.println("Revisiones disponibles: ");
+            List<Revision> revisions = revisionService.listRevisions();
+            for (Revision revision : revisions) {
+                System.out.println(String.format("%d. Fecha: %s, ID del avión: %d", 
+                        revision.getId(), revision.getRevisionDate().toString(), revision.getPlaneId()));
+            }
+            System.out.println("Selecciona el id:");
+            Long id = input.nextLong();
+            return id;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void updateRevision() {
+        try {
+            System.out.println("Ingresa el ID de la revisión a actualizar:");
+            Long id = input.nextLong();
+            input.nextLine(); // Consume el newline
+            Revision revision = revisionService.getRevisionById(id);
+            if (revision == null) {
+                System.out.println("Revisión no encontrada.");
+                return;
+            }
+            System.out.println("Ingresa la nueva fecha de la revisión (YYYY-MM-DD):");
+            revision.setRevisionDate(LocalDate.parse(input.nextLine()));
+            String plates = planeController.listPlanes();
+            Plane plane = planeController.getPlane(plates);
+            revision.setPlaneId(plane.getId());
+            input.nextLine(); // Consume el newline
+            revisionService.updateRevision(revision);
+            System.out.println("Revisión actualizada exitosamente.");
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error al actualizar la revisión.");
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteRevision() {
+        try {
+            Long id = listRevisions();
+            revisionService.deleteRevision(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
