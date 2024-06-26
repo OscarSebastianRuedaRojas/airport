@@ -1,10 +1,9 @@
 package com.airport;
 
-import com.airport.Revision.infrastructure.adapter.in.RevisionController;
+import com.airport.Admin.infrastructure.adapter.in.AdminController;
 public class Main {
     public static void main(String[] args) {
-        RevisionController control = new RevisionController();
-        // control.registerRevision();
-        control.deleteRevision();
+        AdminController adminController = new AdminController();
+        adminController.mostrarMenuAdmin();
     }
 }
