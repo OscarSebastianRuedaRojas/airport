@@ -96,4 +96,39 @@ public class DocumentTypeController {
             e.printStackTrace();
         }
     }
+
+    public void mostrarMenuTipoDocumento() {
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println("\nMenú de Gestión de Tipos de Documentos");
+            System.out.println("1. Registrar tipo de documento");
+            System.out.println("2. Consultar tipo de documento por ID");
+            System.out.println("3. Eliminar tipo de documento");
+            System.out.println("4. Actualizar datos de tipo de documento");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = input.nextInt();
+            input.nextLine(); // limpiar buffer
+    
+            switch (opcion) {
+                case 1:
+                    this.registerDocumentType();
+                    break;
+                case 2:
+                    this.get();
+                    break;
+                case 3:
+                    this.delete();
+                    break;
+                case 4:
+                    this.updateDocumentType();
+                    break;
+                case 0:
+                    System.out.println("Saliendo del menú...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intente de nuevo.");
+            }
+        }
+    }
 }
