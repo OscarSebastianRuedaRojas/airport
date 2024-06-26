@@ -23,14 +23,14 @@ public class FlightConnectionRepository implements FlighConnectionRepositoryPort
 
     @Override
     public FlightConnection save(FlightConnection flightConnection) {
-        String query = "INSERT INTO flight_connection (connection_number, trip_id, plane_id, airport_id) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO flight_connections (connection_number, trip_id, plane_id, airport_id) VALUES (?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, flightConnection.getConnection_number());
             preparedStatement.setLong(2, flightConnection.getTrip_id());
             preparedStatement.setLong(3, flightConnection.getPlane_id());
-            preparedStatement.setLong(4, flightConnection.getAirport_id());
+            preparedStatement.setString(4, flightConnection.getAirport_id());
 
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -47,7 +47,7 @@ public class FlightConnectionRepository implements FlighConnectionRepositoryPort
     @Override
     public List<FlightConnection> findAll() {
         List<FlightConnection> flightConnections = new ArrayList<>();
-        String query = "SELECT * FROM flight_connection";
+        String query = "SELECT * FROM flight_connections";
         try (Connection connection = DriverManager.getConnection(url, username, password);
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
@@ -58,7 +58,7 @@ public class FlightConnectionRepository implements FlighConnectionRepositoryPort
                 flightConnection.setConnection_number(resultSet.getString("connection_number"));
                 flightConnection.setTrip_id(resultSet.getLong("trip_id"));
                 flightConnection.setPlane_id(resultSet.getLong("plane_id"));
-                flightConnection.setAirport_id(resultSet.getLong("airport_id"));
+                flightConnection.setAirport_id(resultSet.getString("airport_id"));
                 flightConnections.add(flightConnection);
             }
         } catch (SQLException e) {
@@ -69,7 +69,7 @@ public class FlightConnectionRepository implements FlighConnectionRepositoryPort
 
     @Override
     public FlightConnection findById(Long id) {
-        String query = "SELECT * FROM flight_connection WHERE id = ?";
+        String query = "SELECT * FROM flight_connections WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -81,7 +81,7 @@ public class FlightConnectionRepository implements FlighConnectionRepositoryPort
                 flightConnection.setConnection_number(resultSet.getString("connection_number"));
                 flightConnection.setTrip_id(resultSet.getLong("trip_id"));
                 flightConnection.setPlane_id(resultSet.getLong("plane_id"));
-                flightConnection.setAirport_id(resultSet.getLong("airport_id"));
+                flightConnection.setAirport_id(resultSet.getString("airport_id"));
                 return flightConnection;
             }
         } catch (SQLException e) {
@@ -92,7 +92,7 @@ public class FlightConnectionRepository implements FlighConnectionRepositoryPort
 
     @Override
     public void delete(Long id) {
-        String query = "DELETE FROM flight_connection WHERE id = ?";
+        String query = "DELETE FROM flight_connections WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -105,14 +105,14 @@ public class FlightConnectionRepository implements FlighConnectionRepositoryPort
 
     @Override
     public FlightConnection update(FlightConnection flightConnection, Long id) {
-        String query = "UPDATE flight_connection SET connection_number = ?, trip_id = ?, plane_id = ?, airport_id = ? WHERE id = ?";
+        String query = "UPDATE flight_connections SET connection_number = ?, trip_id = ?, plane_id = ?, airport_id = ? WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, flightConnection.getConnection_number());
             preparedStatement.setLong(2, flightConnection.getTrip_id());
             preparedStatement.setLong(3, flightConnection.getPlane_id());
-            preparedStatement.setLong(4, flightConnection.getAirport_id());
+            preparedStatement.setString(4, flightConnection.getAirport_id());
             preparedStatement.setLong(5, id);
 
             preparedStatement.executeUpdate();
