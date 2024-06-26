@@ -124,4 +124,40 @@ public class FlightFareController {
             }
         }
     }
+    
+    public void mostrarMenuTarifa() {
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println("\nMenú de Gestión de Tarifas");
+            System.out.println("1. Registrar tarifa");
+            System.out.println("2. Consultar información de tarifa");
+            System.out.println("3. Eliminar tarifa");
+            System.out.println("4. Actualizar datos de tarifa");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = input.nextInt();
+            input.nextLine();  // limpiar el buffer
+
+            switch (opcion) {
+                case 1:
+                    this.registerFlightfare();
+                    break;
+                case 2:
+                    this.flightFaresList();
+                    break;
+                case 3:
+                    this.deleteFlightFare();
+                    break;
+                case 4:
+                    this.updateFlightFare();
+                    break;
+                case 0:
+                    System.out.println("Saliendo del menú...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intente de nuevo.");
+            }
+        }
+    }
+
 }
