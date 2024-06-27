@@ -2,9 +2,12 @@ package com.airport.FlighConnection.infrastructure.adapter.in;
 
 import java.util.List;
 import java.util.Scanner;
-
+import com.airport.Airport.infrastructure.adapter.in.AirportController;
 import com.airport.FlighConnection.application.service.FlightConnectionService;
 import com.airport.FlighConnection.domain.FlightConnection;
+import com.airport.Plane.domain.Plane;
+import com.airport.Plane.infrastructure.adapter.in.PlaneController;
+import com.airport.Trip.infrastructure.adapter.in.TripController;
 
 /**
  * FlightConnectionController
@@ -12,11 +15,18 @@ import com.airport.FlighConnection.domain.FlightConnection;
 public class FlightConnectionController {
 
     private FlightConnectionService flightConnectionService;
+    private AirportController airportController;
+    private PlaneController planeController;
+    private TripController tripController;
+
     private Scanner input;
 
     public FlightConnectionController() {
         this.flightConnectionService = new FlightConnectionService();
         this.input = new Scanner(System.in);
+        this.planeController = new PlaneController();
+        this.tripController = new TripController();
+        this.airportController = new AirportController();
     }
 
     public FlightConnection save() {
@@ -24,13 +34,15 @@ public class FlightConnectionController {
             FlightConnection flightConnection = new FlightConnection();
             System.out.println("Ingresa el número de conexión: ");
             flightConnection.setConnection_number(input.nextLine());
-            System.out.println("Selecciona el ID del viaje: ");
-            flightConnection.setTrip_id(input.nextLong());
-            System.out.println("Selecciona el ID del avión: ");
-            flightConnection.setPlane_id(input.nextLong());
-            System.out.println("Selecciona el ID del aeropuerto: ");
-            flightConnection.setAirport_id(input.nextLong());
-            input.nextLine();  // limpiar buffer
+            Long tripId = tripController.listTrips();
+            flightConnection.setTrip_id(tripId);
+            String planePlates = planeController.listPlanes();
+            Plane selectedPlane = planeController.getPlane(planePlates);
+            flightConnection.setPlane_id(selectedPlane.getId());
+            System.out.println("Ingrese el id del aeropueto.");
+            airportController.listAirports();
+            flightConnection.setAirport_id(input.nextLine().toUpperCase());
+            System.out.println(flightConnection);
             if (flightConnectionService.createFlightConnection(flightConnection) != null) {
                 System.out.println("La conexión de vuelo fue guardada exitosamente");
             }
@@ -46,7 +58,7 @@ public class FlightConnectionController {
             List<FlightConnection> flightConnections = flightConnectionService.listFlightConnections();
             System.out.println("Conexiones de vuelo disponibles:");
             for (FlightConnection flightConnection : flightConnections) {
-                System.out.println(String.format("ID: %d, Número de conexión: %s, ID del viaje: %d, ID del avión: %d, ID del aeropuerto: %d",
+                System.out.println(String.format("ID: %d, Número de conexión: %s, ID del viaje: %d, ID del avión: %d, ID del aeropuerto: %s",
                         flightConnection.getId(), flightConnection.getConnection_number(), flightConnection.getTrip_id(),
                         flightConnection.getPlane_id(), flightConnection.getAirport_id()));
             }
@@ -62,7 +74,7 @@ public class FlightConnectionController {
 
     public void informacionFlightConnection() {
         try {
-            Long id = this.listFlightConnections();
+            Long id = listFlightConnections();
             FlightConnection flightConnection = flightConnectionService.findFlightConnectionById(id);
             if (flightConnection == null) {
                 System.out.println("Esta conexión de vuelo no existe.");
@@ -90,17 +102,18 @@ public class FlightConnectionController {
 
     public void actualizarFlightConnection() {
         try {
-            Long id = this.listFlightConnections();
+            Long id = listFlightConnections();
             FlightConnection flightConnection = new FlightConnection();
             System.out.println("Ingresa el nuevo número de conexión: ");
             flightConnection.setConnection_number(input.nextLine());
-            System.out.println("Selecciona el nuevo ID del viaje: ");
-            flightConnection.setTrip_id(input.nextLong());
-            System.out.println("Selecciona el nuevo ID del avión: ");
-            flightConnection.setPlane_id(input.nextLong());
-            System.out.println("Selecciona el nuevo ID del aeropuerto: ");
-            flightConnection.setAirport_id(input.nextLong());
-            input.nextLine();  // limpiar buffer
+            Long tripId = tripController.listTrips();
+            flightConnection.setTrip_id(tripId);
+            String planePlates = planeController.listPlanes();
+            Plane selectedPlane = planeController.getPlane(planePlates);
+            flightConnection.setPlane_id(selectedPlane.getId());
+            System.out.println("Ingrese el id del nuevo aeropueto.");
+            airportController.listAirports();
+            flightConnection.setAirport_id(input.nextLine().toUpperCase());
             flightConnectionService.updateFlightConnection(id, flightConnection);
         } catch (Exception e) {
             e.printStackTrace();

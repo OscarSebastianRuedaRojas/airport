@@ -9,12 +9,12 @@ public class FlightConnection {
     private String connection_number;
     private Long trip_id;
     private Long plane_id;
-    private Long airport_id;
+    private String airport_id;
     
     public FlightConnection() {
     }
 
-    public FlightConnection(Long id, String connection_number, Long trip_id, Long plane_id, Long airport_id) {
+    public FlightConnection(Long id, String connection_number, Long trip_id, Long plane_id, String airport_id) {
         this.id = id;
         this.connection_number = connection_number;
         this.trip_id = trip_id;
@@ -54,12 +54,18 @@ public class FlightConnection {
         this.plane_id = plane_id;
     }
 
-    public Long getAirport_id() {
+    public String getAirport_id() {
         return airport_id;
     }
 
-    public void setAirport_id(Long airport_id) {
+    public void setAirport_id(String airport_id) {
         this.airport_id = airport_id;
+    }
+
+    @Override
+    public String toString() {
+        return "FlightConnection [id=" + id + ", connection_number=" + connection_number + ", trip_id=" + trip_id
+                + ", plane_id=" + plane_id + ", airport_id=" + airport_id + "]";
     }
 
     

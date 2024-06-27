@@ -36,7 +36,10 @@ public class Revision {
     }
     @Override
     public String toString() {
-        return "Revision [id=" + id + ", revisionDate=" + revisionDate + ", planeId=" + planeId + "]";
+        return "Revision:\n\t" +
+               "id: " + id + "\n\t" +
+               "revisionDate: " + revisionDate + "\n\t" +
+               "planeId: " + planeId;
     }
     
 }

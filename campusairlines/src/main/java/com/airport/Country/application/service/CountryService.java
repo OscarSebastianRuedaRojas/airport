@@ -46,7 +46,7 @@ public class CountryService implements ICountryService{
         try {
             return countryRepository.findById(id);
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace(); 
         }
         return null;
     }

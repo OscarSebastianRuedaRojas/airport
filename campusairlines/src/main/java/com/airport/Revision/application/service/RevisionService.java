@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.airport.Revision.application.port.out.RevisionRepositoryPort;
 import com.airport.Revision.domain.Revision;
+import com.airport.Revision.domain.RevisionDTO;
 import com.airport.Revision.infrastructure.adapter.out.RevisionRepository;
 
 public class RevisionService {
@@ -55,5 +56,13 @@ public class RevisionService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public List<RevisionDTO> getRevisionByPlanePlate(String plate) {
+        try {
+            return revisionRepository.findByPlanePlate(plate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
