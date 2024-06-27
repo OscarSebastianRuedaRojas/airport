@@ -1,13 +1,13 @@
-package com.airport.TripBookingDetail.application.port.out;
+package com.airport.TripBookingDetail.application.port.in;
 
 import java.util.List;
 
 import com.airport.TripBookingDetail.domain.TripBookingDetail;
 
 /**
- * TripBookingDetailRepositoryPort
+ * TripBookingDetailService
  */
-public interface TripBookingDetailRepositoryPort {
+public interface ITripBookingDetailService {
 
     TripBookingDetail save(TripBookingDetail tripBookingDetail);
     TripBookingDetail findById(Long id);
