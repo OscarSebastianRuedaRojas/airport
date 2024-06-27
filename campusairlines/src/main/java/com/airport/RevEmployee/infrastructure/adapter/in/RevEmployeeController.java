@@ -3,6 +3,7 @@ package com.airport.RevEmployee.infrastructure.adapter.in;
 import java.util.List;
 import java.util.Scanner;
 
+import com.airport.Employee.infrastructure.adapter.in.EmployeeController;
 import com.airport.RevEmployee.application.service.RevEmployeeService;
 import com.airport.RevEmployee.domain.RevEmployee;
 
@@ -12,10 +13,12 @@ import com.airport.RevEmployee.domain.RevEmployee;
 public class RevEmployeeController {
 
     private RevEmployeeService revEmployeeService;
+    private EmployeeController employeeController;
     private Scanner input;
 
     public RevEmployeeController() {
         this.revEmployeeService = new RevEmployeeService();
+        this.employeeController = new EmployeeController();
         this.input = new Scanner(System.in);
     }
 
@@ -23,6 +26,7 @@ public class RevEmployeeController {
         try {
             RevEmployee revEmployee = new RevEmployee();
             System.out.println("Ingresa el ID del Empleado: ");
+            employeeController.listEmployees();
             revEmployee.setIdEmployee(input.nextLine());
             System.out.println("Ingresa el ID de la Revisión: ");
             revEmployee.setIdRevision(input.nextLong());
@@ -88,6 +92,7 @@ public class RevEmployeeController {
             RevEmployee revEmployee = new RevEmployee();
 
             System.out.println("Ingresa el nuevo ID del Empleado: ");
+            employeeController.listEmployees();
             revEmployee.setIdEmployee(input.nextLine());
             System.out.println("Ingresa el nuevo ID de la Revisión: ");
             revEmployee.setIdRevision(input.nextLong());
