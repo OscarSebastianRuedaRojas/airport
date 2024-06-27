@@ -3,16 +3,17 @@ package com.airport.Revision.application.port.in;
 import java.util.List;
 
 import com.airport.Revision.domain.Revision;
+import com.airport.Revision.domain.RevisionDTO;
 
 /**
  * RevisionService
  */
-public interface RevisionService {
-    Revision cretaRevision(Revision revision);
+public interface IRevisionService {
+    Revision createRevision(Revision revision);
     Revision getRevision(Long id);
     List<Revision> getAllRevisions();
-    void updateRevisiom(Revision revision);
+    void updateRevision(Revision revision);
     void deleteRevision(Long id);
-    Revision getRevisionByPlanePlate(String plate);
+    List<RevisionDTO> getRevisionByPlanePlate(String plate);
 
 }

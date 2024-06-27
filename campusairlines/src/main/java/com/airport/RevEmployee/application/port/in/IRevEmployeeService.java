@@ -11,7 +11,7 @@ public interface IRevEmployeeService {
 
     RevEmployee save(RevEmployee revEmployee);
     Optional<RevEmployee> findById(Long id);
-    List<RevEmployee> findAll();
+    List<RevEmployee>  findAll();
     void deleteById(Long id);
     void update(RevEmployee revEmployee);
 }

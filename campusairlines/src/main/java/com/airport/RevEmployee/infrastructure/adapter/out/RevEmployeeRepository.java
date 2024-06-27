@@ -21,7 +21,7 @@ public class RevEmployeeRepository implements RevEmployeeRepositoryPort{
 
     public RevEmployee save(RevEmployee revEmployee) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "INSERT INTO revemployee (idEmployee, idRevision) VALUES (?, ?)";
+            String query = "INSERT INTO revemployee (id_employee, id_revision) VALUES (?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, revEmployee.getIdEmployee());
             preparedStatement.setLong(2, revEmployee.getIdRevision());
@@ -46,8 +46,8 @@ public class RevEmployeeRepository implements RevEmployeeRepositoryPort{
             if (resultSet.next()) {
                 RevEmployee revEmployee = new RevEmployee();
                 revEmployee.setId(resultSet.getLong("id"));
-                revEmployee.setIdEmployee(resultSet.getString("idEmployee"));
-                revEmployee.setIdRevision(resultSet.getLong("idRevision"));
+                revEmployee.setIdEmployee(resultSet.getString("id_employee"));
+                revEmployee.setIdRevision(resultSet.getLong("id_revision"));
                 return Optional.of(revEmployee);
             }
         } catch (Exception e) {
@@ -65,8 +65,8 @@ public class RevEmployeeRepository implements RevEmployeeRepositoryPort{
             while (resultSet.next()) {
                 RevEmployee revEmployee = new RevEmployee();
                 revEmployee.setId(resultSet.getLong("id"));
-                revEmployee.setIdEmployee(resultSet.getString("idEmployee"));
-                revEmployee.setIdRevision(resultSet.getLong("idRevision"));
+                revEmployee.setIdEmployee(resultSet.getString("id_employee"));
+                revEmployee.setIdRevision(resultSet.getLong("id_revision"));
                 revEmployees.add(revEmployee);
             }
             return revEmployees;
@@ -89,7 +89,7 @@ public class RevEmployeeRepository implements RevEmployeeRepositoryPort{
 
     public void update(RevEmployee revEmployee) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "UPDATE revemployee SET idEmployee = ?, idRevision = ? WHERE id = ?";
+            String query = "UPDATE revemployee SET id_employee = ?, id_revision = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, revEmployee.getIdEmployee());
             preparedStatement.setLong(2, revEmployee.getIdRevision());

@@ -2,12 +2,13 @@ package com.airport.Revision.application.service;
 
 import java.util.List;
 
+import com.airport.Revision.application.port.in.IRevisionService;
 import com.airport.Revision.application.port.out.RevisionRepositoryPort;
 import com.airport.Revision.domain.Revision;
 import com.airport.Revision.domain.RevisionDTO;
 import com.airport.Revision.infrastructure.adapter.out.RevisionRepository;
 
-public class RevisionService {
+public class RevisionService implements IRevisionService {
 
     private RevisionRepositoryPort revisionRepository;
 
@@ -17,6 +18,7 @@ public class RevisionService {
 
     public Revision createRevision(Revision revision) {
         try {
+            
             return revisionRepository.save(revision);
         } catch (Exception e) {
             e.printStackTrace();
@@ -24,7 +26,7 @@ public class RevisionService {
         return null;
     }
 
-    public List<Revision> listRevisions() {
+    public List<Revision> getAllRevisions() {
         try {
             return revisionRepository.findAll();
         } catch (Exception e) {
@@ -33,7 +35,7 @@ public class RevisionService {
         return null;
     }
 
-    public Revision getRevisionById(Long id) {
+    public Revision getRevision(Long id) {
         try {
             return revisionRepository.findById(id);
         } catch (Exception e) {
@@ -65,4 +67,5 @@ public class RevisionService {
         }
         return null;
     }
+
 }

@@ -6,13 +6,17 @@ import java.util.Scanner;
 
 import com.airport.Plane.domain.Plane;
 import com.airport.Plane.infrastructure.adapter.in.PlaneController;
+import com.airport.RevEmployee.infrastructure.adapter.in.RevEmployeeController;
 import com.airport.Revision.application.service.RevisionService;
 import com.airport.Revision.domain.Revision;
 import com.airport.Revision.domain.RevisionDTO;
+import com.airport.RevisionDetail.infrastructure.adapter.in.RevisionDetailController;
 
 public class RevisionController {
     private RevisionService revisionService;
     private PlaneController planeController;
+    private RevEmployeeController revEmployeeController;
+    private RevisionDetailController revisionDetailController;
     private Scanner input;
 
     public RevisionController() {
@@ -49,7 +53,7 @@ public class RevisionController {
     public Long listRevisions() {
         try {
             System.out.println("Revisiones disponibles: ");
-            List<Revision> revisions = revisionService.listRevisions();
+            List<Revision> revisions = revisionService.getAllRevisions();
             for (Revision revision : revisions) {
                 System.out.println(String.format("%d. Fecha: %s, ID del avión: %d",
                         revision.getId(), revision.getRevisionDate().toString(), revision.getPlaneId()));
@@ -68,7 +72,7 @@ public class RevisionController {
             System.out.println("Ingresa el ID de la revisión a actualizar:");
             Long id = input.nextLong();
             input.nextLine(); // Consume el newline
-            Revision revision = revisionService.getRevisionById(id);
+            Revision revision = revisionService.getRevision(id);
             if (revision == null) {
                 System.out.println("Revisión no encontrada.");
                 return;
@@ -97,7 +101,7 @@ public class RevisionController {
     }
 
     public boolean verification(Revision newRevision) {
-        List<Revision> revisions = revisionService.listRevisions();
+        List<Revision> revisions = revisionService.getAllRevisions();
         boolean[] flag = {false};
         revisions.forEach(revision -> {
             if (revision.getRevisionDate().equals(newRevision.getRevisionDate()) && revision.getPlaneId().equals(newRevision.getPlaneId())) {
@@ -113,6 +117,87 @@ public class RevisionController {
             planeRevisions.forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public void mostrarMenuRevision() {
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println("\n Revisiones");
+            System.out.println("1. Registrar revisión");
+            System.out.println("2. Consultar información de revisión");
+            System.out.println("3. Eliminar revisión");
+            System.out.println("4. Actualizar datos de revisión");
+            System.out.println("5. Consultar revisiones por matrícula de avión");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = input.nextInt();
+            input.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    registerRevision();
+                    break;
+                case 2:
+                    Long id = listRevisions();
+                    if (id != null) {
+                        Revision revision = revisionService.getRevision(id);
+                        if (revision != null) {
+                            System.out.println("ID: " + revision.getId());
+                            System.out.println("Fecha de revisión: " + revision.getRevisionDate());
+                            System.out.println("ID del avión: " + revision.getPlaneId());
+                        } else {
+                            System.out.println("Revisión no encontrada.");
+                        }
+                    } else {
+                        System.out.println("ID de revisión no válido.");
+                    }
+                    break;
+                case 3:
+                    deleteRevision();
+                    System.out.println("Revisión eliminada exitosamente.");
+                    break;
+                case 4:
+                    updateRevision();
+                    break;
+                case 5:
+                    getRevisionByPlanePlate();
+                    break;
+                case 0:
+                    System.out.println("Saliendo del menú...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intente de nuevo.");
+            }
+        }
+    }
+    public void RevisionManager() {
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println("\nMenú de Gestión de Revisiones");
+            System.out.println("1. Administrar Revisiones");
+            System.out.println("2. Administrar empleados de revisiones ");
+            System.out.println("3. Administrar detalles de revisiones");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = input.nextInt();
+            input.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    mostrarMenuRevision();
+                    break;
+                case 2:
+                    revEmployeeController.mostrarMenuRevEmployee();
+                    break;
+                case 3:
+                    revisionDetailController.mostrarMenuRevisionDetail();
+                    break;
+                case 0:
+                    System.out.println("Saliendo del menú...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intente de nuevo.");
+            }
         }
     }
 }
