@@ -26,8 +26,7 @@ public class RevEmployeeController {
         try {
             RevEmployee revEmployee = new RevEmployee();
             System.out.println("Ingresa el ID del Empleado: ");
-            employeeController.listEmployees();
-            revEmployee.setIdEmployee(input.nextLine());
+            revEmployee.setIdEmployee(employeeController.listEmployees());
             System.out.println("Ingresa el ID de la Revisión: ");
             revEmployee.setIdRevision(input.nextLong());
             input.nextLine(); 
@@ -92,12 +91,10 @@ public class RevEmployeeController {
             RevEmployee revEmployee = new RevEmployee();
 
             System.out.println("Ingresa el nuevo ID del Empleado: ");
-            employeeController.listEmployees();
-            revEmployee.setIdEmployee(input.nextLine());
+            revEmployee.setIdEmployee(employeeController.listEmployees());
             System.out.println("Ingresa el nuevo ID de la Revisión: ");
             revEmployee.setIdRevision(input.nextLong());
             input.nextLine(); 
-
             revEmployee.setId(id);
             revEmployeeService.update(revEmployee);
             System.out.println("El empleado de revisión fue actualizado exitosamente");
@@ -121,16 +118,16 @@ public class RevEmployeeController {
 
             switch (opcion) {
                 case 1:
-                    this.save();
+                    save();
                     break;
                 case 2:
-                    this.informacionRevEmployee();
+                    informacionRevEmployee();
                     break;
                 case 3:
-                    this.eliminarRevEmployee();
+                    eliminarRevEmployee();
                     break;
                 case 4:
-                    this.actualizarRevEmployee();
+                    actualizarRevEmployee();
                     break;
                 case 0:
                     System.out.println("Saliendo del menú...");

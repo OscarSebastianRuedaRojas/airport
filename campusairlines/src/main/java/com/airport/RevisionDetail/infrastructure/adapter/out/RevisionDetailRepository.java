@@ -24,7 +24,7 @@ public class RevisionDetailRepository implements RevisionDetailRepositoryPort{
 
     public RevisionDetail save(RevisionDetail revisionDetail) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "INSERT INTO revision_detail (description, revemployee_id) VALUES(?, ?)";
+            String query = "INSERT INTO revisions_details (description, revemployee_id) VALUES(?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, revisionDetail.getDescription());
             preparedStatement.setLong(2, revisionDetail.getRevemployeeId());
@@ -43,7 +43,7 @@ public class RevisionDetailRepository implements RevisionDetailRepositoryPort{
     public List<RevisionDetail> findAll() {
         List<RevisionDetail> revisionDetails = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT * FROM revision_detail";
+            String query = "SELECT * FROM revisions_details";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
@@ -61,7 +61,7 @@ public class RevisionDetailRepository implements RevisionDetailRepositoryPort{
 
     public RevisionDetail findById(Long id) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT * FROM revision_detail WHERE id = ?";
+            String query = "SELECT * FROM revisions_details WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -80,7 +80,7 @@ public class RevisionDetailRepository implements RevisionDetailRepositoryPort{
 
     public void deleteById(Long id) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "DELETE FROM revision_detail WHERE id = ?";
+            String query = "DELETE FROM revisions_details WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
@@ -91,7 +91,7 @@ public class RevisionDetailRepository implements RevisionDetailRepositoryPort{
 
     public RevisionDetail update(RevisionDetail revisionDetail) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "UPDATE revision_detail SET description = ?, revemployee_id = ? WHERE id = ?";
+            String query = "UPDATE revisions_details SET description = ?, revemployee_id = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, revisionDetail.getDescription());
             preparedStatement.setLong(2, revisionDetail.getRevemployeeId());

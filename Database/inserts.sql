@@ -121,10 +121,10 @@ INSERT INTO revemployee (id_employee, id_revision) VALUES
 ('234567890', 2),
 ('345678901', 3);
 
-INSERT INTO revisions_details (id, description, revemployee_id) VALUES
-('REVDET001', 'Engine inspection', 1),
-('REVDET002', 'Landing gear check', 2),
-('REVDET003', 'Cabin pressure test', 3);
+INSERT INTO revisions_details (description, revemployee_id) VALUES
+( 'Engine inspection', 1),
+( 'Landing gear check', 2),
+( 'Cabin pressure test', 3);
 
 INSERT INTO flight_connections (connection_number, trip_id, plane_id, airport_id) VALUES
 ('FC001', 1, 1, 'JFK'),

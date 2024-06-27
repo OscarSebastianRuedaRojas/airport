@@ -22,6 +22,8 @@ public class RevisionController {
     public RevisionController() {
         this.revisionService = new RevisionService();
         this.planeController = new PlaneController();
+        this.revEmployeeController = new RevEmployeeController();
+        this.revisionDetailController = new RevisionDetailController();
         this.input = new Scanner(System.in);
     }
 
