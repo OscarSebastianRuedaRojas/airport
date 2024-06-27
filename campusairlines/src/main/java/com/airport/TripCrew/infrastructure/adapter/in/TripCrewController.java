@@ -54,7 +54,7 @@ public class TripCrewController {
         }
     }
 
-    private void informacionTripCrew() {
+    public void informacionTripCrew() {
         try {
             System.out.println("Ingresa el ID del empleado: ");
             String employeeId = input.nextLine();
