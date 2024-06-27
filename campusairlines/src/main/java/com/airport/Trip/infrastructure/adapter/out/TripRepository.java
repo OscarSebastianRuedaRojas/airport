@@ -98,7 +98,7 @@ public class TripRepository implements TripRepositoryPort {
     @Override
     public Trip findById(Long id) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT * FROM trip WHERE id = ?";
+            String query = "SELECT * FROM trips WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
