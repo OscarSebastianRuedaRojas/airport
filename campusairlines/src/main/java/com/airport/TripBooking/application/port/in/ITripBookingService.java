@@ -1,13 +1,13 @@
-package com.airport.TripBooking.application.port.out;
+package com.airport.TripBooking.application.port.in;
 
 import com.airport.TripBooking.domain.TripBooking;
 
 /**
- * TripBookingRepositoryPort
+ * TripBookingService
  */
-public interface TripBookingRepositoryPort {
+public interface ITripBookingService {
 
     TripBooking save(TripBooking tripBooking);
     TripBooking findById(Long id);
-    
+
 }
