@@ -6,24 +6,18 @@ import java.util.Scanner;
 
 import com.airport.Plane.domain.Plane;
 import com.airport.Plane.infrastructure.adapter.in.PlaneController;
-import com.airport.RevEmployee.infrastructure.adapter.in.RevEmployeeController;
 import com.airport.Revision.application.service.RevisionService;
 import com.airport.Revision.domain.Revision;
 import com.airport.Revision.domain.RevisionDTO;
-import com.airport.RevisionDetail.infrastructure.adapter.in.RevisionDetailController;
 
 public class RevisionController {
     private RevisionService revisionService;
     private PlaneController planeController;
-    private RevEmployeeController revEmployeeController;
-    private RevisionDetailController revisionDetailController;
     private Scanner input;
 
     public RevisionController() {
         this.revisionService = new RevisionService();
         this.planeController = new PlaneController();
-        this.revEmployeeController = new RevEmployeeController();
-        this.revisionDetailController = new RevisionDetailController();
         this.input = new Scanner(System.in);
     }
 
@@ -172,34 +166,5 @@ public class RevisionController {
             }
         }
     }
-    public void RevisionManager() {
-        int opcion = -1;
-        while (opcion != 0) {
-            System.out.println("\nMenú de Gestión de Revisiones");
-            System.out.println("1. Administrar Revisiones");
-            System.out.println("2. Administrar empleados de revisiones ");
-            System.out.println("3. Administrar detalles de revisiones");
-            System.out.println("0. Salir");
-            System.out.print("Seleccione una opción: ");
-            opcion = input.nextInt();
-            input.nextLine();
-
-            switch (opcion) {
-                case 1:
-                    mostrarMenuRevision();
-                    break;
-                case 2:
-                    revEmployeeController.mostrarMenuRevEmployee();
-                    break;
-                case 3:
-                    revisionDetailController.mostrarMenuRevisionDetail();
-                    break;
-                case 0:
-                    System.out.println("Saliendo del menú...");
-                    break;
-                default:
-                    System.out.println("Opción no válida, intente de nuevo.");
-            }
-        }
-    }
+    
 }
