@@ -21,7 +21,9 @@ public class TripBookingController {
         this.input = new Scanner(System.in);
     }
 
-    public TripBooking registerTripBooking() throws ParseException{
+    public TripBooking 
+    
+    registerTripBooking() throws ParseException{
         try {
             TripBooking tripBooking = new TripBooking();
             TripController tripController = new TripController();
