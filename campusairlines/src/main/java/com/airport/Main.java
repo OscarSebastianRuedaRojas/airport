@@ -1,11 +1,32 @@
 package com.airport;
 
-import com.airport.Admin.infrastructure.adapter.in.AdminController;
+
 public class Main {
     public static void main(String[] args) {
-        AdminController adminController = new AdminController();
-        adminController.mostrarMenuAdmin();
-
-
+        // AdminController adminController = new AdminController();
+        // adminController.mostrarMenuAdmin();
     }
+    public static void printA320SeatDiagram() {
+                // Parte superior del avión
+                System.out.println("                 _________");
+                System.out.println("                /         \\");
+                System.out.println("               /           \\");
+                System.out.println("              /             \\");
+                System.out.println("             /               \\");
+                System.out.println("            /_________________\\");
+                
+                // Asientos
+                int row = 1;
+                while (row <= 35) {
+                    System.out.printf("            | %2d  A B C   D E F |\n", row);
+                    row++;
+                }
+                
+                // Parte inferior del avión
+                System.out.println("            \\                 /");
+                System.out.println("             \\               /");
+                System.out.println("              \\             /");
+                System.out.println("               \\           /");
+                System.out.println("                \\_________/");
+            }
 }
