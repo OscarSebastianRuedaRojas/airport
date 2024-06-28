@@ -19,7 +19,7 @@ public class CustomerController {
         this.input = new Scanner(System.in);
     }
 
-    public void save() {
+    public Customer save() {
         try {
             System.out.println("Ingrese el nombre del cliente:");
             String customerName = input.nextLine();
@@ -32,9 +32,11 @@ public class CustomerController {
             Customer customer = new Customer(null, customerName, customerAge, documentTypeId);
             customerService.save(customer);
             System.out.println("Cliente registrado exitosamente.");
+            return customer;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public void listCustomers() {

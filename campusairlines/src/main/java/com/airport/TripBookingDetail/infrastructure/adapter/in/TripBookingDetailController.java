@@ -24,11 +24,10 @@ public class TripBookingDetailController {
         this.input = new Scanner(System.in);
     }
 
-    public void registerTripBookingDetail() {
+    public TripBookingDetail registerTripBookingDetail() {
         try {
             TripBookingDetail tripBookingDetail = new TripBookingDetail();
     
-            // Solicitar y guardar el TripBooking
             TripBooking tripBooking = new TripBooking();
             TripController tripController = new TripController();
             System.out.println("Ingrese la fecha para la reserva (yyyy-MM-dd): ");
@@ -37,20 +36,39 @@ public class TripBookingDetailController {
             tripBooking.setDate(sqlDate);
             System.out.println("Seleccione el trayecto:");
             tripBooking.setTrip_id(tripController.listTrips());
-            tripBooking = tripBookingService.save(tripBooking);  // Guardar y obtener el tripBooking con ID
+            tripBooking = tripBookingService.save(tripBooking); 
             tripBookingDetail.setTripBookingId(tripBooking.getId());
     
-            // Solicitar y guardar detalles de TripBookingDetail
             System.out.println("Ingrese el ID del cliente:");
             tripBookingDetail.setCustomerId(input.nextLine());
             System.out.println("Ingrese el ID de la tarifa:");
             tripBookingDetail.setFaresId(input.nextInt());
-            input.nextLine();  // Limpiar buffer
-            tripBookingDetailService.save(tripBookingDetail);
+            input.nextLine();  
+            TripBookingDetail newTripBooking = tripBookingDetailService.save(tripBookingDetail);
             System.out.println("Detalle de reserva registrado exitosamente.");
+            return newTripBooking;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public TripBookingDetail registerTripBookingDetailSinTripBooking(TripBooking tripBooking) {
+        try {
+            TripBookingDetail tripBookingDetail = new TripBookingDetail();
+            tripBookingDetail.setTripBookingId(tripBooking.getId());
+            System.out.println("Ingrese el ID del cliente:");
+            tripBookingDetail.setCustomerId(input.nextLine());
+            System.out.println("Ingrese el ID de la tarifa:");
+            tripBookingDetail.setFaresId(input.nextInt());
+            input.nextLine();  
+            TripBookingDetail newTripBooking = tripBookingDetailService.save(tripBookingDetail);
+            System.out.println("Detalle de reserva registrado exitosamente.");
+            return newTripBooking;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void listTripBookingDetails() {

@@ -21,7 +21,7 @@ public class TripBookingController {
         this.input = new Scanner(System.in);
     }
 
-    public void registerTripBooking() throws ParseException{
+    public TripBooking registerTripBooking() throws ParseException{
         try {
             TripBooking tripBooking = new TripBooking();
             TripController tripController = new TripController();
@@ -33,11 +33,15 @@ public class TripBookingController {
             tripBooking.setDate(sqlDate);
             System.out.println("Selecciona el trayecto:");
             tripBooking.setTrip_id(tripController.listTrips());
-            tripBookingService.save(tripBooking);
+            TripBooking savedTrip = tripBookingService.save(tripBooking);
+            if (savedTrip != null) {
+                System.out.println("Reserva creada exitosamente.");
+            }
+            return savedTrip;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+        return null;
     }
 
     public TripBooking findById(Long id){
