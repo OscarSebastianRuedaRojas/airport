@@ -1,12 +1,39 @@
 package com.airport;
 
-import com.airport.Tecnico.infrastructure.adapter.in.TecnicoController;
+import java.util.Scanner;
+
+import com.airport.User.infrastructure.adapter.in.UserController;
 
 public class Main {
     public static void main(String[] args) {
-        // AdminController adminController = new AdminController();
-        // adminController.mostrarMenuAdmin();
-        TecnicoController tecnicoController = new TecnicoController();
-        tecnicoController.RevisionManager();
+        UserController userController = new UserController();
+        Scanner input = new Scanner(System.in);
+        int option;
+
+        do {
+            System.out.println("----- Menú Principal -----");
+            System.out.println("1. Registrar usuario");
+            System.out.println("2. Iniciar sesión");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            option = input.nextInt();
+            input.nextLine(); // Limpiar buffer
+
+            switch (option) {
+                case 1:
+                    userController.registerUser();
+                    break;
+                case 2:
+                    userController.loginUser();
+                    break;
+                case 0:
+                    System.out.println("Saliendo del sistema...");
+                    break;
+                default:
+                    System.out.println("Opción inválida. Por favor, intente de nuevo.");
+            }
+        } while (option != 0);
+
+        input.close();
     }
 }

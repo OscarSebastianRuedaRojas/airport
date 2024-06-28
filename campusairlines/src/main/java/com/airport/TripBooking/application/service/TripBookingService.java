@@ -2,24 +2,25 @@ package com.airport.TripBooking.application.service;
 
 import com.airport.TripBooking.application.port.in.ITripBookingService;
 import com.airport.TripBooking.domain.TripBooking;
+import com.airport.TripBooking.infrastructure.adapter.out.TripBookingRepository;
 
 /**
  * TripBookingService
  */
 public class TripBookingService implements ITripBookingService{
 
-    private TripBookingService tripBookingService;
+    private TripBookingRepository tripBookingRepository;
 
     
 
     public TripBookingService() {
-        this.tripBookingService = new TripBookingService();
+        this.tripBookingRepository = new TripBookingRepository();
     }
 
     @Override
     public TripBooking save(TripBooking tripBooking) {
         try {
-            TripBooking newTripBooking = tripBookingService.save(tripBooking);
+            TripBooking newTripBooking = tripBookingRepository.save(tripBooking);
             if (newTripBooking!= null) {
                 return newTripBooking;
             }
@@ -32,7 +33,7 @@ public class TripBookingService implements ITripBookingService{
     @Override
     public TripBooking findById(Long id) {
         try {
-            TripBooking newTripBooking = tripBookingService.findById(id);
+            TripBooking newTripBooking = tripBookingRepository.findById(id);
             if (newTripBooking!= null) {
                 return newTripBooking;
             }
