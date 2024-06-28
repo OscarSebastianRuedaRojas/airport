@@ -154,7 +154,4 @@ INSERT INTO trip_booking_details (trip_booking_id, customer_id, fares_id) VALUES
 (4, '998877665', 1),
 (5, '556677889', 2);
 
-INSERT INTO user_type (name) VALUES ('admin');
-INSERT INTO user_type (name) VALUES ('agente de ventas');
-INSERT INTO user_type (name) VALUES ('tecnico');
-INSERT INTO user_type (name) VALUES ('cliente');
+INSERT INTO user_type (name) VALUES ('admin'), ('agente de ventas'), ('tecnico'), ('cliente'), ('superusuario');
