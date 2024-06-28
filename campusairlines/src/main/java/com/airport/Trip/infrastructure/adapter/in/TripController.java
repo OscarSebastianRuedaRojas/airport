@@ -125,6 +125,7 @@ public class TripController {
         }
     }
     public void buscarTripPorFechaSalidaLLegada() {
+        System.out.println("Buscar viajes disponibles");
         try {
             System.out.println("Ingrese fecha de salida");
             Date trip_date = Date.valueOf(input.nextLine());
@@ -180,5 +181,17 @@ public class TripController {
                     System.out.println("Opción no válida, intente de nuevo.");
             }
         }
+    }
+    public Trip getTripById() {
+        try {
+            System.out.println("Ingrese id del viaje.");
+            Long id = input.nextLong();
+            Trip trip = tripService.findTripById(id);
+            trip.toString();
+            return trip;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
