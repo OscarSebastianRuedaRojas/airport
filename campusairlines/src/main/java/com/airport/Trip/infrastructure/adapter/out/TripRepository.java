@@ -1,6 +1,7 @@
 package com.airport.Trip.infrastructure.adapter.out;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -116,5 +117,31 @@ public class TripRepository implements TripRepositoryPort {
         }
         return null;
     }
+
+    @Override
+public Trip findTripByDateDepartureCityArrivalCity(String departureCityId, String destinationCityId, Date tripDate) {
+    try (Connection connection = DriverManager.getConnection(url, username, password)) {
+        String query = "SELECT * FROM trips WHERE departure_city_id = ? AND destination_city_id = ? AND trip_date = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, departureCityId);
+        preparedStatement.setString(2, destinationCityId);
+        preparedStatement.setDate(3, tripDate);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            Trip trip = new Trip();
+            trip.setId(resultSet.getLong("id"));
+            trip.setTrip_date(resultSet.getDate("trip_date"));
+            trip.setPrice_trip(resultSet.getFloat("price_trip"));
+            trip.setDeparture_city_id(resultSet.getString("departure_city_id"));
+            trip.setDestination_city_id(resultSet.getString("destination_city_id"));
+            return trip;
+        }
+    } catch (Exception e) {
+        System.out.println("Error al buscar trip por date, departure city y arrival city");
+        e.printStackTrace();
+    }
+    return null;
+}
+
 
 }

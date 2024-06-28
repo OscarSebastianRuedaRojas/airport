@@ -1,5 +1,6 @@
 package com.airport.Trip.application.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.airport.Trip.application.port.in.ITripService;
@@ -72,4 +73,17 @@ public class TripService implements ITripService {
         }
         return null;
     }
+
+    @Override
+    public Trip findTripByDateDepartureCityArrivalCity(String departureCityId, String destinationCityId,
+            Date tripDate) {
+        try {
+            return tripRepository.findTripByDateDepartureCityArrivalCity(departureCityId, destinationCityId, tripDate);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
 }
