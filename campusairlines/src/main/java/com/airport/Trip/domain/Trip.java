@@ -12,7 +12,7 @@ public class Trip {
     private float price_trip;
     private String departure_city_id;
     private String destination_city_id;
-    
+
     public Trip() {
     }
 
@@ -64,5 +64,14 @@ public class Trip {
         this.destination_city_id = destination_city_id;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Trip Details:\n" +
+                "\tID: " + id + "\n" +
+                "\tTrip Date: " + trip_date + "\n" +
+                "\tPrice: $" + price_trip + "\n" +
+                "\tDeparture City ID: " + departure_city_id + "\n" +
+                "\tDestination City ID: " + destination_city_id;
+    }
+
 }

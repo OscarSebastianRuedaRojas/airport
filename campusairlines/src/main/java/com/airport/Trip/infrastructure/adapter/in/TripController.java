@@ -1,6 +1,7 @@
 package com.airport.Trip.infrastructure.adapter.in;
 
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
@@ -16,10 +17,12 @@ import com.airport.Trip.domain.Trip;
 public class TripController {
 
     private TripService tripService;
+    private CityController cityController;
     private Scanner input;
 
     public TripController() {
         this.tripService = new TripService();
+        this.cityController = new CityController();
         this.input = new Scanner(System.in);
     }
 
@@ -121,7 +124,25 @@ public class TripController {
             e.printStackTrace();
         }
     }
-    
+    public void buscarTripPorFechaSalidaLLegada() {
+        try {
+            System.out.println("Ingrese fecha de salida");
+            Date trip_date = Date.valueOf(input.nextLine());
+            System.out.println("Ciudad de salida.");
+            String departure_city_id = cityController.cityList();
+            System.out.println("Ciudad de llegada.");
+            String arrival_city_id = cityController.cityList();
+            Trip searchedTrip = tripService.findTripByDateDepartureCityArrivalCity(departure_city_id, arrival_city_id, trip_date);
+            if (searchedTrip != null) {
+            System.out.println(searchedTrip);
+            } else {
+                System.out.println("No hay viajes ");
+            }
+                
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void mostrarMenuTrip() {
         int opcion = -1;
         while (opcion != 0) {
@@ -130,6 +151,7 @@ public class TripController {
             System.out.println("2. Consultar información de viaje");
             System.out.println("3. Eliminar viaje");
             System.out.println("4. Actualizar datos de viaje");
+            System.out.println("5. Buscar trip por destino, llegada y fecha");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = input.nextInt();
@@ -147,6 +169,9 @@ public class TripController {
                     break;
                 case 4:
                     this.actualizarTrip();
+                    break;
+                case 5:
+                this.buscarTripPorFechaSalidaLLegada();
                     break;
                 case 0:
                     System.out.println("Saliendo del menú...");
