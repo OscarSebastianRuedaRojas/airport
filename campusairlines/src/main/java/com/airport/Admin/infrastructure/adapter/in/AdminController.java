@@ -15,8 +15,7 @@ public class AdminController {
         this.admin = new Admin();
     }
 
-    public void mostrarMenuAdmin() {
-        Scanner input = new Scanner(System.in);
+    public void mostrarMenuAdmin(Scanner input) {
         int opcion = -1;
 
         while (opcion != 0) {
@@ -67,7 +66,6 @@ public class AdminController {
             }
         }
 
-        input.close();
     }
 
     
