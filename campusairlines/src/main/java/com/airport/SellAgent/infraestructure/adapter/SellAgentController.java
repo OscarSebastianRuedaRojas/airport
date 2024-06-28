@@ -11,8 +11,8 @@ public class SellAgentController {
         this.sellAgent = new SellAgent();
     }
 
-    public void menuSaleAgent(){
-        Scanner input = new Scanner(System.in);
+    public void menuSaleAgent(Scanner input){
+        
         int opcion = -1;
 
         while (opcion != 0) {
@@ -63,6 +63,6 @@ public class SellAgentController {
             }
         }
 
-        input.close();
+        
     }
 }

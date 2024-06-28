@@ -21,7 +21,7 @@ public class Main {
 
             switch (option) {
                 case 1:
-                    userController.registerUser();
+                    userController.registerCustomer();
                     break;
                 case 2:
                     userController.loginUser();
