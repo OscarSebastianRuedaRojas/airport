@@ -167,3 +167,15 @@ CREATE TABLE trip_booking_details (
     CONSTRAINT fk_costumer_id Foreign Key (customer_id) REFERENCES customer(id),
     CONSTRAINT fk_fares_id Foreign Key (fares_id) REFERENCES flight_fare(id)
 );
+
+CREATE TABLE user_type(
+    id INT PRIMARY KEY auto_increment,
+    name VARCHAR(30)
+);
+
+CREATE TABLE user(
+    id VARCHAR(20) PRIMARY KEY,
+    password VARCHAR(255),
+    id_user_type INT,
+    CONSTRAINT fk_user_type FOREIGN KEY (id_user_type) REFERENCES user_type(id)
+);
