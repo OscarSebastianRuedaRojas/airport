@@ -1,19 +1,13 @@
 package com.airport;
 
-<<<<<<< HEAD
 import com.airport.Tecnico.infrastructure.adapter.in.TecnicoController;
-=======
->>>>>>> Felipe
 
 public class Main {
     public static void main(String[] args) {
         // AdminController adminController = new AdminController();
         // adminController.mostrarMenuAdmin();
-<<<<<<< HEAD
         TecnicoController tecnicoController = new TecnicoController();
         tecnicoController.RevisionManager();
-=======
->>>>>>> Felipe
     }
     public static void printA320SeatDiagram() {
                 // Parte superior del avión
