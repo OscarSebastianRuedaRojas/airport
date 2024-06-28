@@ -127,7 +127,7 @@ CREATE TABLE revemployee (
 );
 
 CREATE TABLE revisions_details(
-    id VARCHAR(20) PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     description TEXT,
     revemployee_id int,
     CONSTRAINT fk_revemployee_id FOREIGN KEY (revemployee_id) REFERENCES revemployee(id)
