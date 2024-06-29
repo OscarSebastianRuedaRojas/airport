@@ -155,7 +155,7 @@ CREATE TABLE trip_booking (
     id INT auto_increment PRIMARY KEY,
     date date,
     trip_id INT,
-    seat VARCHAR(5);
+    seat VARCHAR(5),
     CONSTRAINT fk_trip_id_trip_booking Foreign Key (trip_id) REFERENCES trips(id)
 );
 
