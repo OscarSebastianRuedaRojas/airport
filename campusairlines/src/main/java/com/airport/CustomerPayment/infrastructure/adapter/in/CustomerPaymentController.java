@@ -2,6 +2,8 @@ package com.airport.CustomerPayment.infrastructure.adapter.in;
 
 import java.util.List;
 import java.util.Scanner;
+
+import com.airport.Customer.infrastructure.adapter.in.CustomerController;
 import com.airport.CustomerPayment.application.service.CustomerPaymentService;
 import com.airport.CustomerPayment.domain.CustomerPayment;
 
@@ -11,20 +13,25 @@ import com.airport.CustomerPayment.domain.CustomerPayment;
 public class CustomerPaymentController {
 
     private final CustomerPaymentService customerPaymentService;
+    private final CustomerController customerController;
+    private final PaymentMethods paymentMethods;
     private final Scanner input;
 
     public CustomerPaymentController() {
         this.customerPaymentService = new CustomerPaymentService();
+        this.customerController = new CustomerController();
+        this.paymentMethods = new PaymentMethods();
         this.input = new Scanner(System.in);
     }
 
     public CustomerPayment save() {
         try {
             System.out.println("Ingrese el ID del cliente:");
+            customerController.listCustomers();
             String customerId = input.nextLine();
             System.out.println("Ingrese el ID del método de pago:");
+            paymentMethods.listPaymentMethods();
             int paymentMethodId = input.nextInt();
-            input.nextLine();  // clear the buffer
             System.out.println("Ingrese el número de la tarjeta:");
             String cardNumber = input.nextLine();
             System.out.println("Ingrese el nombre del titular de la tarjeta:");
@@ -63,8 +70,10 @@ public class CustomerPaymentController {
                 return;
             }
             System.out.println("Ingrese el nuevo ID del cliente:");
+            customerController.listCustomers();
             String customerId = input.nextLine();
             System.out.println("Ingrese el nuevo ID del método de pago:");
+            paymentMethods.listPaymentMethods();
             int paymentMethodId = input.nextInt();
             input.nextLine();  // clear the buffer
             System.out.println("Ingrese el nuevo número de la tarjeta:");
@@ -86,6 +95,7 @@ public class CustomerPaymentController {
     public void deleteCustomerPayment() {
         try {
             System.out.println("Ingrese el ID del método de pago a eliminar:");
+            paymentMethods.listPaymentMethods();
             int id = input.nextInt();
             input.nextLine();  // clear the buffer
             customerPaymentService.deleteCustomerPayment(id);
