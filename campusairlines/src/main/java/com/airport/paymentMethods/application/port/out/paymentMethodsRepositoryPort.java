@@ -10,7 +10,7 @@ import com.airport.PaymentMethods.domain.PaymentMethods;
 public interface PaymentMethodsRepositoryPort {
 
     PaymentMethods save(PaymentMethods paymentMethods);
-    void update(PaymentMethods paymentMethods, int id);
+    void update(PaymentMethods paymentMethods);
     void delete(int id);
     List<PaymentMethods> findAll();
     PaymentMethods findById(int id);

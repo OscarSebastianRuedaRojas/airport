@@ -98,11 +98,11 @@ public class PaymentMethodsRepository implements PaymentMethodsRepositoryPort {
     }
 
     @Override
-    public void update(PaymentMethods paymentMethods, int id) {
+    public void update(PaymentMethods paymentMethods) {
         String query = " UPDATE payment_methods SET method_name = ? WHERE id = ?";
         try (Connection connection = DriverManager.getConnection(url, username, password);
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(2, id);
+            preparedStatement.setInt(2, paymentMethods.getId());
             preparedStatement.setString(1, paymentMethods.getMethodName());
             preparedStatement.executeUpdate();
         } catch (Exception e) {

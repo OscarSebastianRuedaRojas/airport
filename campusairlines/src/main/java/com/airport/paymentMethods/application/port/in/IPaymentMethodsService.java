@@ -9,7 +9,7 @@ import com.airport.PaymentMethods.domain.PaymentMethods;
 public interface IPaymentMethodsService {
     
     PaymentMethods createPaymentMethods(PaymentMethods paymentMethods);
-    void updatePaymentMethods(int id, PaymentMethods paymentMethods);
+    void updatePaymentMethods(PaymentMethods paymentMethods);
     void deletePaymentMethods(int id);
     List<PaymentMethods> listPaymentMethodss();
     PaymentMethods findPaymentMethodsById(int id);
