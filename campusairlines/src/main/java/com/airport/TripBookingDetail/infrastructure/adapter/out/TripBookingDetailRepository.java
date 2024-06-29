@@ -23,12 +23,13 @@ public class TripBookingDetailRepository implements TripBookingDetailRepositoryP
     @Override
     public TripBookingDetail save(TripBookingDetail tripBookingDetail) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "INSERT INTO trip_booking_details (trip_booking_id, customer_id, fares_id, seat) VALUES (?, ?, ?, ? )";
+            String query = "INSERT INTO trip_booking_details (trip_booking_id, customer_id, fares_id, seat, customer_payment_id ) VALUES (?, ?, ?, ?, ? )";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, tripBookingDetail.getTripBookingId());
             preparedStatement.setString(2, tripBookingDetail.getCustomerId());
             preparedStatement.setInt(3, tripBookingDetail.getFaresId());
             preparedStatement.setString(4, tripBookingDetail.getSeat());
+            preparedStatement.setInt(5, tripBookingDetail.getCustomerPaymentId());
             preparedStatement.executeUpdate();
             return tripBookingDetail;
         } catch (Exception e) {
@@ -51,6 +52,7 @@ public class TripBookingDetailRepository implements TripBookingDetailRepositoryP
                 tripBookingDetail.setCustomerId(resultSet.getString("customer_id"));
                 tripBookingDetail.setFaresId(resultSet.getInt("fares_id"));
                 tripBookingDetail.setSeat(resultSet.getString("seat"));
+                tripBookingDetail.setCustomerPaymentId(resultSet.getInt("customer_payment_id"));
                 return tripBookingDetail;
             }
         } catch (Exception e) {
@@ -73,6 +75,7 @@ public class TripBookingDetailRepository implements TripBookingDetailRepositoryP
                 tripBookingDetail.setCustomerId(resultSet.getString("customer_id"));
                 tripBookingDetail.setFaresId(resultSet.getInt("fares_id"));
                 tripBookingDetail.setSeat(resultSet.getString("seat"));
+                tripBookingDetail.setCustomerPaymentId(resultSet.getInt("customer_payment_id"));
                 tripBookingDetails.add(tripBookingDetail);
             }
         } catch (Exception e) {
@@ -96,13 +99,14 @@ public class TripBookingDetailRepository implements TripBookingDetailRepositoryP
     @Override
     public TripBookingDetail update(Long id, TripBookingDetail tripBookingDetail) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "UPDATE trip_booking_details SET trip_booking_id = ?, customer_id = ?, fares_id = ?, seat = ? WHERE id = ?";
+            String query = "UPDATE trip_booking_details SET trip_booking_id = ?, customer_id = ?, fares_id = ?, seat = ?, customer_payment_id = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, tripBookingDetail.getTripBookingId());
             preparedStatement.setString(2, tripBookingDetail.getCustomerId());
             preparedStatement.setInt(3, tripBookingDetail.getFaresId());
             preparedStatement.setLong(4, id);
             preparedStatement.setString(5, tripBookingDetail.getSeat());
+            preparedStatement.setInt(5, tripBookingDetail.getCustomerPaymentId());
             preparedStatement.executeUpdate();
             return tripBookingDetail;
         } catch (Exception e) {

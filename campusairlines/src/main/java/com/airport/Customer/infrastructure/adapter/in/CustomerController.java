@@ -118,5 +118,8 @@ public class CustomerController {
             }
         }
     }
+    public Customer getCustomer(String id) {
+        return customerService.findById(id);
+    }
 
 }

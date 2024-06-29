@@ -30,11 +30,12 @@ public class CustomerBookingController {
                     System.out.println("Desea continuar?\n\t1. Si\n\t2. No");
                     if (input.nextInt() != 2) {
                         try {
+                            System.out.println("Aqui se hace el de la reserva principa");
                             TripBookingController tripBookingController = new TripBookingController();
                             TripBooking tripBooking = tripBookingController.registerTripBooking();
                             while (true) {
                                 tripBookingDetailController.registerTripBookingDetailSinTripBooking(tripBooking);
-                                System.out.println("Desea agregar mas pasageros a la reserva?");
+                                System.out.println("Desea agregar mas pasajeros a la reserva?");
                                 System.out.println("1. Si.");
                                 System.out.println("2. No.");
                                 if (input.nextInt() == 2) {

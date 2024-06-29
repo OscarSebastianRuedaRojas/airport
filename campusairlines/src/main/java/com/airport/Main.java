@@ -40,8 +40,8 @@ public class Main {
         // } while (option != 0);
 
         // input.close();
-        CustomerPaymentController troll = new CustomerPaymentController();
-        troll.showMenu();
+        CustomerBookingController troll = new CustomerBookingController();
+        troll.CreateFlightBooking();
     }
 
 }

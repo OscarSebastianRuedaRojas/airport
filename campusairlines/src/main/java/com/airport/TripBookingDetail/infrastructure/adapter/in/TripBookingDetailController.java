@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.airport.Customer.infrastructure.adapter.in.CustomerController;
+import com.airport.CustomerPayment.infrastructure.adapter.in.CustomerPaymentController;
 import com.airport.FlightFare.infrastructure.adapter.in.FlightFareController;
 import com.airport.Trip.infrastructure.adapter.in.TripController;
 import com.airport.TripBooking.application.service.TripBookingService;
@@ -22,6 +23,7 @@ public class TripBookingDetailController {
     private final Scanner input;
     private final CustomerController customerController;
     private final FlightFareController flightFareController;
+    private final CustomerPaymentController customerPaymentController;
 
     public TripBookingDetailController() {
         this.tripBookingDetailService = new TripBookingDetailService();
@@ -29,6 +31,7 @@ public class TripBookingDetailController {
         this.input = new Scanner(System.in);
         this.customerController = new CustomerController();
         this.flightFareController = new FlightFareController();
+        this.customerPaymentController = new CustomerPaymentController(); 
     }
 
     public TripBookingDetail registerTripBookingDetail() {
@@ -52,6 +55,10 @@ public class TripBookingDetailController {
             flightFareController.listFlightFare();
             tripBookingDetail.setFaresId(input.nextInt());
             input.nextLine();  
+            System.out.println("Seleccione metodo de pago registrado para:" + customerController.getCustomer(tripBookingDetail.getCustomerId()).getCustomer_name());
+            customerPaymentController.listCustomerPayments();
+            int customerPaymentId = input.nextInt();
+            tripBookingDetail.setCustomerPaymentId(customerPaymentId);
             TripBookingDetail newTripBooking = tripBookingDetailService.save(tripBookingDetail);
             System.out.println("Detalle de reserva registrado exitosamente.");
             return newTripBooking;
@@ -62,12 +69,15 @@ public class TripBookingDetailController {
     }
 
     public TripBookingDetail registerTripBookingDetailSinTripBooking(TripBooking tripBooking) {
+        input.nextLine();
         try {
             TripBookingDetail tripBookingDetail = new TripBookingDetail();
             tripBookingDetail.setTripBookingId(tripBooking.getId());
             System.out.println("Ingrese el ID del cliente:");
+            customerController.listCustomers();
             tripBookingDetail.setCustomerId(input.nextLine());
             System.out.println("Ingrese el ID de la tarifa:");
+            flightFareController.listFlightFare();
             tripBookingDetail.setFaresId(input.nextInt());
             input.nextLine();
             List<TripBookingDetail> reservasDeVuelo = tripBookingDetailService.findAll();
@@ -87,6 +97,10 @@ public class TripBookingDetailController {
                     break;
                 }
             }  
+            System.out.println("Seleccione metodo de pago registrado para:" + customerController.getCustomer(tripBookingDetail.getCustomerId()).getCustomer_name());
+            customerPaymentController.listCustomerPayments();
+            int customerPaymentId = input.nextInt();
+            tripBookingDetail.setCustomerPaymentId(customerPaymentId);
             TripBookingDetail newTripBooking = tripBookingDetailService.save(tripBookingDetail);
             System.out.println("Detalle de reserva registrado exitosamente.");
             return newTripBooking;
@@ -116,8 +130,10 @@ public class TripBookingDetailController {
                 return;
             }
             System.out.println("Ingrese el nuevo ID del cliente:");
+            customerController.listCustomers();
             existingDetail.setCustomerId(input.nextLine());
             System.out.println("Ingrese el nuevo ID de la tarifa:");
+            flightFareController.listFlightFare();
             existingDetail.setFaresId(input.nextInt());
             input.nextLine();  // Limpiar buffer
             tripBookingDetailService.update(id, existingDetail);

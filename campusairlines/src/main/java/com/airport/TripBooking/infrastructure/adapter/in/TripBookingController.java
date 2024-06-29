@@ -22,6 +22,7 @@ public class TripBookingController {
     }
 
     public TripBooking registerTripBooking() throws ParseException{
+        System.out.println("entramos aqui");
         try {
             TripBooking tripBooking = new TripBooking();
             TripController tripController = new TripController();
