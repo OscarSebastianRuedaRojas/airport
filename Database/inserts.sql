@@ -163,3 +163,7 @@ INSERT INTO user (id, password, id_user_type) VALUES
 ('1198011450', '608de87a684083f202059ccff547697e2b66497179a17ad0e7002492394c0537', 1),
 ('12345', 'f6f2ea8f45d8a057c9566a33f99474da2e5c6a6604d736121650e2730c6fb0a3', 1),
 ('2087312', 'c4a389462174c2ba59b44d4426550d62be551064d33b9e58d37cdb7ead58ef48', 2);
+
+INSERT INTO payment_methods (method_name) VALUES 
+('Tarjeta de Crédito'), 
+('Tarjeta de Débito');

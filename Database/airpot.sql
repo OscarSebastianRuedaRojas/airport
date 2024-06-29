@@ -180,3 +180,20 @@ CREATE TABLE user(
     id_user_type INT,
     CONSTRAINT fk_user_type FOREIGN KEY (id_user_type) REFERENCES user_type(id)
 );
+
+
+CREATE TABLE payment_methods (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    method_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE customer_payment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id VARCHAR(20),
+    payment_method_id INT,
+    card_number VARCHAR(20) NOT NULL,
+    card_holder_name VARCHAR(50) NOT NULL,
+    card_expiry_date DATE NOT NULL,
+    CONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES customer(id),
+    CONSTRAINT fk_payment_method_id FOREIGN KEY (payment_method_id) REFERENCES payment_methods(id)
+);
