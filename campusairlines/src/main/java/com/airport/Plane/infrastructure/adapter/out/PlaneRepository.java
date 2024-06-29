@@ -58,7 +58,7 @@ public class PlaneRepository implements PlaneRepositoryPort {
                 plane.setCapacity(resultSet.getInt("capacity"));
                 plane.setFabrication_date(resultSet.getDate("fecha_fabricacion"));
                 plane.setStatus(resultSet.getString("estado"));
-                plane.setModel(resultSet.getString("aerolinea"));
+                plane.setAirline(resultSet.getString("aerolinea"));
                 plane.setModel(resultSet.getString("modelo"));
                 return plane;
             }
