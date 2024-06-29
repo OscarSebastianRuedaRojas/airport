@@ -7,7 +7,7 @@ import com.airport.PaymentMethods.domain.PaymentMethods;
 /**
  * paymentMethodsRepositoryPort
  */
-public interface paymentMethodsRepositoryPort {
+public interface PaymentMethodsRepositoryPort {
 
     PaymentMethods save(PaymentMethods paymentMethods);
     void update(PaymentMethods paymentMethods, int id);
