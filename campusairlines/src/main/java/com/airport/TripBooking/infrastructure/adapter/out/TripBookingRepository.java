@@ -49,7 +49,7 @@ public class TripBookingRepository implements TripBookingRepositoryPort{
     @Override
     public TripBooking findById(Long id) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT date, trip_id FROM trip_booking WHERE id = ?";
+            String query = "SELECT id, date, trip_id FROM trip_booking WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
