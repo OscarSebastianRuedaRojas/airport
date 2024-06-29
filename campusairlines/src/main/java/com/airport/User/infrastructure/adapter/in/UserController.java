@@ -25,7 +25,7 @@ public class UserController {
         this.tecnicoController = new TecnicoController();
     }
 
-    public void registerUser() {
+    public void registerUserAdmin() {
         System.out.println("Ingrese su ID (cédula): ");
         String id = input.nextLine();
         System.out.println("Ingrese su contraseña: ");
@@ -48,6 +48,46 @@ public class UserController {
         System.out.println("Usuario registrado exitosamente.");
     }
 
+    public void registerCustomer() {
+        System.out.println("Ingrese su ID (cédula): ");
+        String id = input.nextLine();
+        System.out.println("Ingrese su contraseña: ");
+        String password = input.nextLine();
+
+        User user = new User();
+        user.setId(id);
+        user.setPassword(password);
+        user.setUserTypeId(4);
+
+        userService.registerUser(user);
+        System.out.println("Usuario registrado exitosamente.");
+    }
+
+    public void mostrarMenuSuperUsuario() {
+        int opcion = -1;
+
+        while (opcion != 0) {
+            System.out.println("\nModo Superusuario");
+            System.out.println("1. Crear Usuario");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = input.nextInt();
+            input.nextLine();  // limpiar el buffer
+
+            switch (opcion) {
+                case 1:
+                    this.registerUserAdmin();
+                    break;
+                case 0:
+                    System.out.println("Saliendo del modo superusuario...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intente de nuevo.");
+            }
+        }
+
+    }
+
     public void loginUser() {
         System.out.println("Ingrese su ID (cédula): ");
         String id = input.nextLine();
@@ -62,13 +102,16 @@ public class UserController {
                     adminController.mostrarMenuAdmin(input);
                     break;
                 case 2:
-                    sellAgentController.menuSaleAgent();
+                    sellAgentController.menuSaleAgent(input);
                     break;
                 case 3:
                     tecnicoController.RevisionManager();
                     break;
                 case 4:
                     // Menú para cliente
+                    break;
+                case 5:
+                    this.mostrarMenuSuperUsuario();
                     break;
                 default:
                     System.out.println("Tipo de usuario desconocido.");

@@ -155,3 +155,11 @@ INSERT INTO trip_booking_details (trip_booking_id, customer_id, fares_id) VALUES
 (5, '556677889', 2);
 
 INSERT INTO user_type (name) VALUES ('admin'), ('agente de ventas'), ('tecnico'), ('cliente'), ('superusuario');
+
+INSERT INTO user (id, password, id_user_type) VALUES 
+('1095910230', 'c9e5336ac870fad9739e41ac17dca0cca14dc41cd325497e9091c1153d04c3a4', 4),
+('1098803029', '8d37cd8e5478a1ae7d7649300da9ca6b6d72fa3cfd826c4ca9c8dd19e4d8bced', 1),
+('1101260691', 'd3862fe26070a23a19018ceccd94a57d313e324f823e127bdaeaa60dcfbfa854', 5),
+('1198011450', '608de87a684083f202059ccff547697e2b66497179a17ad0e7002492394c0537', 1),
+('12345', 'f6f2ea8f45d8a057c9566a33f99474da2e5c6a6604d736121650e2730c6fb0a3', 1),
+('2087312', 'c4a389462174c2ba59b44d4426550d62be551064d33b9e58d37cdb7ead58ef48', 2);
