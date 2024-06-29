@@ -21,6 +21,8 @@ public class CustomerController {
 
     public Customer save() {
         try {
+            System.out.println("Ingrese id del cliente");
+            String id = input.nextLine();
             System.out.println("Ingrese el nombre del cliente:");
             String customerName = input.nextLine();
             System.out.println("Ingrese la edad del cliente:");
@@ -29,7 +31,7 @@ public class CustomerController {
             System.out.println("Ingrese el ID del tipo de documento:");
             Long documentTypeId = input.nextLong();
             input.nextLine();  // clear the buffer
-            Customer customer = new Customer(null, customerName, customerAge, documentTypeId);
+            Customer customer = new Customer(id, customerName, customerAge, documentTypeId);
             customerService.save(customer);
             System.out.println("Cliente registrado exitosamente.");
             return customer;

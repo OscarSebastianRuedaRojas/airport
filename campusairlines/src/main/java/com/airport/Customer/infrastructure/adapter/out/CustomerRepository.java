@@ -23,11 +23,12 @@ public class CustomerRepository implements CustomerRepositoryPort{
     @Override
     public Customer save(Customer customer) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "INSERT INTO customer VALUES(NULL, ?, ?, ?)";
+            String query = "INSERT INTO customer VALUES(?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, customer.getCustomer_name());
-            preparedStatement.setInt(2, customer.getCustomer_age());
-            preparedStatement.setLong(3, customer.getDocument_type_id());
+            preparedStatement.setString(1, customer.getId());
+            preparedStatement.setString(2, customer.getCustomer_name());
+            preparedStatement.setInt(3, customer.getCustomer_age());
+            preparedStatement.setLong(4, customer.getDocument_type_id());
             preparedStatement.executeUpdate();
             return customer;
         } catch (Exception e) {
