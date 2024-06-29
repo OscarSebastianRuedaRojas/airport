@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.airport.Admin.infrastructure.adapter.in.AdminController;
+import com.airport.CustomerMenu.infrastructure.CustomerMenuController;
 import com.airport.SellAgent.infraestructure.adapter.SellAgentController;
 import com.airport.Tecnico.infrastructure.adapter.in.TecnicoController;
 import com.airport.User.application.Service.UserService;
@@ -15,6 +16,7 @@ public class UserController {
     private AdminController adminController;
     private SellAgentController sellAgentController;
     private TecnicoController tecnicoController;
+    private CustomerMenuController customerMenuController;
     private Scanner input;
 
     public UserController() {
@@ -23,6 +25,7 @@ public class UserController {
         this.sellAgentController = new SellAgentController();
         this.adminController = new AdminController();
         this.tecnicoController = new TecnicoController();
+        this.customerMenuController = new CustomerMenuController();
     }
 
     public void registerUserAdmin() {
@@ -108,7 +111,7 @@ public class UserController {
                     tecnicoController.RevisionManager();
                     break;
                 case 4:
-                    // Menú para cliente
+                    customerMenuController.mostrarMenuCustomer();
                     break;
                 case 5:
                     this.mostrarMenuSuperUsuario();

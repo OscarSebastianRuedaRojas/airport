@@ -2,6 +2,7 @@ package com.airport.Admin.domain;
 
 
 import com.airport.Airport.infrastructure.adapter.in.AirportController;
+import com.airport.CustomerMenu.infrastructure.CustomerMenuController;
 import com.airport.DocumentType.infrastructure.adapter.in.DocumentTypeController;
 import com.airport.FlighConnection.infrastructure.adapter.in.FlightConnectionController;
 import com.airport.FlightFare.infrastructure.adapter.in.FlightFareController;
@@ -21,6 +22,7 @@ public class Admin {
     private FlightConnectionController flightConnectionController;
     private FlightFareController flightFareController;
     private DocumentTypeController documentTypeController;
+    private CustomerMenuController customerMenuController;
 
     public Admin() {
         this.planeController = new PlaneController();
@@ -30,6 +32,15 @@ public class Admin {
         this.flightConnectionController = new FlightConnectionController();
         this.flightFareController = new FlightFareController();
         this.documentTypeController = new DocumentTypeController();
+        this.customerMenuController = new CustomerMenuController();
+    }
+
+    public CustomerMenuController getCustomerMenuController() {
+        return customerMenuController;
+    }
+
+    public void setCustomerMenuController(CustomerMenuController customerMenuController) {
+        this.customerMenuController = customerMenuController;
     }
 
     public PlaneController getPlaneController() {

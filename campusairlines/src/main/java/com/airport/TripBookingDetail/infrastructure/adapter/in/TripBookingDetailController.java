@@ -136,6 +136,9 @@ public class TripBookingDetailController {
             flightFareController.listFlightFare();
             existingDetail.setFaresId(input.nextInt());
             input.nextLine();  // Limpiar buffer
+            System.out.println("Ingrese id de la nueva opcion de pago");
+            customerPaymentController.listCustomerPayments();
+            existingDetail.setCustomerPaymentId(input.nextInt());
             tripBookingDetailService.update(id, existingDetail);
             System.out.println("Detalle de reserva actualizado exitosamente.");
         } catch (Exception e) {
