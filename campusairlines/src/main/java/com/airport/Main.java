@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.concurrent.CyclicBarrier;
 
 import com.airport.Customer.infrastructure.adapter.in.CustomerBookingController;
+import com.airport.CustomerPayment.infrastructure.adapter.in.CustomerPaymentController;
 import com.airport.User.infrastructure.adapter.in.UserController;
 
 
@@ -38,8 +39,8 @@ public class Main {
         // } while (option != 0);
 
         // input.close();
-        CustomerBookingController troll = new CustomerBookingController();
-        troll.CreateFlightBooking();
+        CustomerPaymentController troll = new CustomerPaymentController();
+        troll.showMenu();
     }
 
 }
