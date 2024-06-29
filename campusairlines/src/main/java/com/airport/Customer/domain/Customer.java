@@ -54,5 +54,12 @@ public class Customer {
         this.document_type_id = document_type_id;
     }
 
+
+    @Override
+    public String toString() {
+        return "Customer [id=" + id + ", customer_name=" + customer_name + ", customer_age=" + customer_age
+                + ", document_type_id=" + document_type_id + "]";
+    }
+
     
 }

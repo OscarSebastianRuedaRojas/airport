@@ -24,5 +24,9 @@ public class PaymentMethods {
     public void setMethodName(String methodName) {
         this.methodName = methodName;
     }
+    @Override
+    public String toString() {
+        return "PaymentMethods [id=" + id + ", methodName=" + methodName + "]";
+    }
     
 }

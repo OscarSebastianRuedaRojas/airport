@@ -83,13 +83,9 @@ public class PaymentMethodsRepository implements PaymentMethodsRepositoryPort {
         try (Connection connection = DriverManager.getConnection(url, username, password);
                 PreparedStatement preparedStatement = connection.prepareStatement(query,
                         Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(2, paymentMethods.getMethodName());
+            preparedStatement.setString(1, paymentMethods.getMethodName());
 
             preparedStatement.executeUpdate();
-            ResultSet rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()) {
-                paymentMethods.setId(rs.getInt("id"));
-            }
             return paymentMethods;
         } catch (SQLException e) {
             e.printStackTrace();

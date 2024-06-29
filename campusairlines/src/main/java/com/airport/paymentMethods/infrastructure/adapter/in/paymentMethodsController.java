@@ -42,16 +42,16 @@ public class PaymentMethodsController {
         try {
             System.out.println("Ingrese el ID del método de pago a actualizar:");
             int id = input.nextInt();
-            input.nextLine();  // clear the buffer
             PaymentMethods existingPaymentMethods = paymentMethodsService.findPaymentMethodsById(id);
+            input.nextLine();
             if (existingPaymentMethods == null) {
                 System.out.println("Tipo de Método de pago no encontrado.");
                 return;
             }
             System.out.println("Ingrese el nuevo nombre del metodo de pago:");
             String method_name = input.nextLine();
-            PaymentMethods updatedPaymentMethods = new PaymentMethods(method_name);
-            paymentMethodsService.updatePaymentMethods(updatedPaymentMethods);
+            existingPaymentMethods.setMethodName(method_name);
+            paymentMethodsService.updatePaymentMethods(existingPaymentMethods);
             System.out.println("Método de pago actualizado exitosamente.");
         } catch (Exception e) {
             e.printStackTrace();

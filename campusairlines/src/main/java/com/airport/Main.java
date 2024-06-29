@@ -5,6 +5,7 @@ import java.util.concurrent.CyclicBarrier;
 
 import com.airport.Customer.infrastructure.adapter.in.CustomerBookingController;
 import com.airport.CustomerPayment.infrastructure.adapter.in.CustomerPaymentController;
+import com.airport.PaymentMethods.infrastructure.adapter.in.PaymentMethodsController;
 import com.airport.User.infrastructure.adapter.in.UserController;
 
 
