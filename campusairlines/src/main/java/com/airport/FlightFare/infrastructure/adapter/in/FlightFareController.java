@@ -2,7 +2,6 @@ package com.airport.FlightFare.infrastructure.adapter.in;
 
 import java.util.List;
 import java.util.Scanner;
-
 import com.airport.FlightFare.application.service.FlightFareService;
 import com.airport.FlightFare.domain.FlightFare;
 
@@ -40,7 +39,14 @@ public class FlightFareController {
             e.printStackTrace();
         }
     }
-
+    public void listFlightFare() {
+        try {
+            List<FlightFare> flightFares = flightFareService.listFlighFares();
+            flightFares.forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public Long flightFaresList() {
         try {
             System.out.println("Tarifas registradas");

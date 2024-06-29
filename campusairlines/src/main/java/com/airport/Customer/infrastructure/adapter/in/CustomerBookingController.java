@@ -21,25 +21,38 @@ public class CustomerBookingController {
     public void CreateFlightBooking() {
         while (true) {
             System.out.println("Bienvenido al portal de reservas de vuelo GLOBAL VUELING S.A.S");
-            tripController.buscarTripPorFechaSalidaLLegada();
-            System.out.println("Desea continuar?\n\t1. Si\n\t2. No");
-            if (input.nextInt() != 2) {
-                try {
-                    TripBookingController tripBookingController = new TripBookingController();
-                    TripBooking tripBooking = tripBookingController.registerTripBooking();
-                    while (true) {
-                        tripBookingDetailController.registerTripBookingDetailSinTripBooking(tripBooking);
-                        System.out.println("Desea agregar mas pasageros a la reserva?");
-                        System.out.println("1. Si.");
-                        System.out.println("2. No.");
-                        if (input.nextInt() == 2) {
-                            break;
+            System.out.println("1. Buscar vuelos.");
+            System.out.println("0. Regresar.");
+            int opc = input.nextInt();
+            switch (opc) {
+                case 1:
+                    tripController.buscarTripPorFechaSalidaLLegada();
+                    System.out.println("Desea continuar?\n\t1. Si\n\t2. No");
+                    if (input.nextInt() != 2) {
+                        try {
+                            TripBookingController tripBookingController = new TripBookingController();
+                            TripBooking tripBooking = tripBookingController.registerTripBooking();
+                            while (true) {
+                                tripBookingDetailController.registerTripBookingDetailSinTripBooking(tripBooking);
+                                System.out.println("Desea agregar mas pasageros a la reserva?");
+                                System.out.println("1. Si.");
+                                System.out.println("2. No.");
+                                if (input.nextInt() == 2) {
+                                    break;
+                                }
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Ocurrio un error al crear la reserva de vuelo.");
+                            e.printStackTrace();
                         }
                     }
-                } catch (Exception e) {
-                    System.out.println("Ocurrio un error al crear la reserva de vuelo.");
-                    e.printStackTrace();
-                }
+                    break;
+                case 0:
+                    System.out.println("Saliendo...");
+                    return;
+                default:
+                    System.out.println("Ocurrio un error.");
+                    break;
             }
         }
 

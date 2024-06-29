@@ -1,8 +1,11 @@
 package com.airport.TripBookingDetail.infrastructure.adapter.in;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.airport.Customer.infrastructure.adapter.in.CustomerController;
+import com.airport.FlightFare.infrastructure.adapter.in.FlightFareController;
 import com.airport.Trip.infrastructure.adapter.in.TripController;
 import com.airport.TripBooking.application.service.TripBookingService;
 import com.airport.TripBooking.domain.TripBooking;
@@ -17,11 +20,15 @@ public class TripBookingDetailController {
     private final TripBookingDetailService tripBookingDetailService;
     private final TripBookingService tripBookingService;
     private final Scanner input;
+    private final CustomerController customerController;
+    private final FlightFareController flightFareController;
 
     public TripBookingDetailController() {
         this.tripBookingDetailService = new TripBookingDetailService();
         this.tripBookingService = new TripBookingService();
         this.input = new Scanner(System.in);
+        this.customerController = new CustomerController();
+        this.flightFareController = new FlightFareController();
     }
 
     public TripBookingDetail registerTripBookingDetail() {
@@ -38,10 +45,11 @@ public class TripBookingDetailController {
             tripBooking.setTrip_id(tripController.listTrips());
             tripBooking = tripBookingService.save(tripBooking); 
             tripBookingDetail.setTripBookingId(tripBooking.getId());
-    
             System.out.println("Ingrese el ID del cliente:");
+            customerController.listCustomers();
             tripBookingDetail.setCustomerId(input.nextLine());
             System.out.println("Ingrese el ID de la tarifa:");
+            flightFareController.listFlightFare();
             tripBookingDetail.setFaresId(input.nextInt());
             input.nextLine();  
             TripBookingDetail newTripBooking = tripBookingDetailService.save(tripBookingDetail);
@@ -61,7 +69,24 @@ public class TripBookingDetailController {
             tripBookingDetail.setCustomerId(input.nextLine());
             System.out.println("Ingrese el ID de la tarifa:");
             tripBookingDetail.setFaresId(input.nextInt());
-            input.nextLine();  
+            input.nextLine();
+            List<TripBookingDetail> reservasDeVuelo = tripBookingDetailService.findAll();
+            List <String> usedSeat = new ArrayList<>();
+            reservasDeVuelo.forEach(reserva -> {
+                usedSeat.add(reserva.getSeat());
+            });
+            while (true) {
+                System.out.println("Digite el asiento que desea.");
+                printDiagram();
+                String seat = input.nextLine().toUpperCase();
+                if (usedSeat.contains(seat)) {
+                    System.out.println("El asiento: " + seat + " esta ocupado, seleccione otro.");
+                } else {
+                    usedSeat.add(seat);
+                    tripBookingDetail.setSeat(seat);
+                    break;
+                }
+            }  
             TripBookingDetail newTripBooking = tripBookingDetailService.save(tripBookingDetail);
             System.out.println("Detalle de reserva registrado exitosamente.");
             return newTripBooking;
@@ -196,6 +221,24 @@ public class TripBookingDetailController {
                     System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
         } while (option != 0);
+    }
+    public static void printDiagram() {
+        System.out.println("                 _________");
+        System.out.println("                /         \\");
+        System.out.println("               /           \\");
+        System.out.println("              /             \\");
+        System.out.println("             /               \\");
+        System.out.println("            /_________________\\");
+        int row = 1;
+        while (row <= 35) {
+            System.out.printf("            | %2d  A B C   D E F |\n", row);
+            row++;
+        }
+        System.out.println("            \\                 /");
+        System.out.println("             \\               /");
+        System.out.println("              \\             /");
+        System.out.println("               \\           /");
+        System.out.println("                \\_________/");
     }
 
 }
