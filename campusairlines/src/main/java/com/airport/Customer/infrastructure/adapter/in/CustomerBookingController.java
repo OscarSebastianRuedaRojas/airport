@@ -8,17 +8,13 @@ import com.airport.TripBooking.infrastructure.adapter.in.TripBookingController;
 import com.airport.TripBookingDetail.infrastructure.adapter.in.TripBookingDetailController;
 
 public class CustomerBookingController {
-    private CustomerController customerController;
     private TripController tripController;
     private TripBookingDetailController tripBookingDetailController;
-    private TripBookingController tripBookingController;
     private Scanner input;
 
     public CustomerBookingController() {
-        this.customerController = new CustomerController();
         this.tripController = new TripController();
         this.tripBookingDetailController = new TripBookingDetailController();
-        this.tripBookingController = new TripBookingController();
         this.input = new Scanner(System.in);
     }
 

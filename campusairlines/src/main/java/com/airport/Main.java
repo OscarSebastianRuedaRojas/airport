@@ -1,8 +1,7 @@
 package com.airport;
 
 import java.util.Scanner;
-
-import com.airport.Customer.infrastructure.adapter.in.CustomerBookingController;
+import com.airport.User.infrastructure.adapter.in.UserController;
 
 
 public class Main {

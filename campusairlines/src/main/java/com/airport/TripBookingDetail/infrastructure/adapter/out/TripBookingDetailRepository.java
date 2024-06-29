@@ -14,7 +14,7 @@ import com.airport.TripBookingDetail.domain.TripBookingDetail;
 /**
  * TripBookingDetailRepository
  */
-public class TripBookingDetailRepository implements TripBookingDetailRepositoryPort{
+public class TripBookingDetailRepository implements TripBookingDetailRepositoryPort {
 
     private String url = "jdbc:mysql://viaduct.proxy.rlwy.net:47771/airport";
     private String username = "root";
@@ -23,11 +23,12 @@ public class TripBookingDetailRepository implements TripBookingDetailRepositoryP
     @Override
     public TripBookingDetail save(TripBookingDetail tripBookingDetail) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "INSERT INTO trip_booking_details (trip_booking_id, customer_id, fares_id) VALUES (?, ?, ?)";
+            String query = "INSERT INTO trip_booking_details (trip_booking_id, customer_id, fares_id, seat) VALUES (?, ?, ?, ? )";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, tripBookingDetail.getTripBookingId());
             preparedStatement.setString(2, tripBookingDetail.getCustomerId());
             preparedStatement.setInt(3, tripBookingDetail.getFaresId());
+            preparedStatement.setString(4, tripBookingDetail.getSeat());
             preparedStatement.executeUpdate();
             return tripBookingDetail;
         } catch (Exception e) {
@@ -49,6 +50,7 @@ public class TripBookingDetailRepository implements TripBookingDetailRepositoryP
                 tripBookingDetail.setTripBookingId(resultSet.getLong("trip_booking_id"));
                 tripBookingDetail.setCustomerId(resultSet.getString("customer_id"));
                 tripBookingDetail.setFaresId(resultSet.getInt("fares_id"));
+                tripBookingDetail.setSeat(resultSet.getString("seat"));
                 return tripBookingDetail;
             }
         } catch (Exception e) {
@@ -70,6 +72,7 @@ public class TripBookingDetailRepository implements TripBookingDetailRepositoryP
                 tripBookingDetail.setTripBookingId(resultSet.getLong("trip_booking_id"));
                 tripBookingDetail.setCustomerId(resultSet.getString("customer_id"));
                 tripBookingDetail.setFaresId(resultSet.getInt("fares_id"));
+                tripBookingDetail.setSeat(resultSet.getString("seat"));
                 tripBookingDetails.add(tripBookingDetail);
             }
         } catch (Exception e) {
@@ -93,12 +96,13 @@ public class TripBookingDetailRepository implements TripBookingDetailRepositoryP
     @Override
     public TripBookingDetail update(Long id, TripBookingDetail tripBookingDetail) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "UPDATE trip_booking_details SET trip_booking_id = ?, customer_id = ?, fares_id = ? WHERE id = ?";
+            String query = "UPDATE trip_booking_details SET trip_booking_id = ?, customer_id = ?, fares_id = ?, seat = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setLong(1, tripBookingDetail.getTripBookingId());
             preparedStatement.setString(2, tripBookingDetail.getCustomerId());
             preparedStatement.setInt(3, tripBookingDetail.getFaresId());
             preparedStatement.setLong(4, id);
+            preparedStatement.setString(5, tripBookingDetail.getSeat());
             preparedStatement.executeUpdate();
             return tripBookingDetail;
         } catch (Exception e) {

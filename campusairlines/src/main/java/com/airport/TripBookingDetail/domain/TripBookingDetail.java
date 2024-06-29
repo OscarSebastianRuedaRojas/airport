@@ -9,15 +9,17 @@ public class TripBookingDetail {
     private Long tripBookingId;
     private String customerId;
     private int faresId;
+    private String seat;
     
     public TripBookingDetail() {
     }
 
-    public TripBookingDetail(Long id, Long tripBookingId, String customerId, int faresId) {
+    public TripBookingDetail(Long id, Long tripBookingId, String customerId, int faresId, String seat) {
         this.id = id;
         this.tripBookingId = tripBookingId;
         this.customerId = customerId;
         this.faresId = faresId;
+        this.seat = seat;
     }
 
     public Long getId() {
@@ -50,6 +52,14 @@ public class TripBookingDetail {
 
     public void setFaresId(int faresId) {
         this.faresId = faresId;
+    }
+
+    public String getSeat() {
+        return seat;
+    }
+
+    public void setSeat(String seat) {
+        this.seat = seat;
     }
 
     
