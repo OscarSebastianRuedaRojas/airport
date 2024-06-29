@@ -57,5 +57,34 @@ public class PaymentMethodsController {
             e.printStackTrace();
         }
     }
+    public void showMenu() {
+        int option = -1;
+        while (option != 0) {
+            System.out.println("\nMenú de Gestión de Métodos de Pago");
+            System.out.println("1. Registrar tipo método de pago");
+            System.out.println("2. Listar métodos de pago");
+            System.out.println("3. Actualizar método de pago");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            option = input.nextInt();
+            input.nextLine();  
 
+            switch (option) {
+                case 1:
+                    this.save();
+                    break;
+                case 2:
+                    this.listPaymentMethodss();
+                    break;
+                case 3:
+                    this.updatePaymentMethods();
+                    break;
+                case 0:
+                    System.out.println("Saliendo del menú...");
+                    break;
+                default:
+                    System.out.println("Opción no válida, intente de nuevo.");
+            }
+        }
+    }
 }
